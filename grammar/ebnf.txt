@@ -1,0 +1,34 @@
+# #  comment
+# () grouping
+# [] optional
+# *  zero or more
+# +  one or more
+# |  alternative
+
+
+
+program    ::= (import)* (fundef)* EOF
+
+import    ::= "import" importable;
+
+fundef    ::= type IDENT "(" params ")" block    # function declaration
+
+type       ::= ("int" | "char" | "void" | "array[" type "]") ["*"]
+
+params     ::= [ type ":" IDENT ("," type ":" IDENT)* ]
+
+stmt       ::= block
+             | "return" [exp] ";"                    # return
+             | exp "=" exp ";"                       # assignment
+             | exp ";"                               # expression statement, e.g. a function call
+
+block      ::= "{" (stmt)* "}"
+
+exp        ::= "(" exp ")"
+             | (IDENT | INT_LITERAL)
+             | CHAR_LITERAL
+             | STRING_LITERAL
+             | funcall
+
+funcall      ::= IDENT "(" [ exp ("," exp)* ] ")"
+
