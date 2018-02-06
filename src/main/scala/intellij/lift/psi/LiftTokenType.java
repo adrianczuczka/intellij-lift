@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LiftTokenType extends IElementType {
     public LiftTokenType(@NotNull @NonNls String debugName) {
-        super(debugName, LiftLanguage.INSTANCE);
+        super(debugName, LiftLanguage.Instance);
     }
 
     @Override

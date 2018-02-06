@@ -4,11 +4,11 @@ import intellij.lift.lexer.{LiftLexer, LiftToken}
 import intellij.lift.parser.{LiftAST, LiftParser}
 
 object LiftCompiler {
-  def apply(code: String): Either[LiftCompilationError, LiftAST] = {
-    for {
-      tokens <- LiftLexer(code).right
-      ast <- LiftParser(tokens).right
-    } yield ast
+  def apply(code: String)/*: Either[LiftCompilationError, LiftAST]*/ = {
+//    for {
+//      tokens <- LiftLexer(code).right
+//      ast <- LiftParser(tokens).right
+//    } yield ast
   }
 
   def main(args: Array[String]): Unit = {

@@ -7,6 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class LiftElementType extends IElementType {
     public LiftElementType(@NotNull @NonNls String debugName) {
-        super(debugName, LiftLanguage.INSTANCE);
+        super(debugName, LiftLanguage.Instance);
     }
 }

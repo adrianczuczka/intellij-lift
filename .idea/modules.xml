@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/intellij-lift/intellij-lift.iml" filepath="$PROJECT_DIR$/intellij-lift/intellij-lift.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellijLift.iml" filepath="$PROJECT_DIR$/.idea/modules/intellijLift.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellijLift-build.iml" filepath="$PROJECT_DIR$/.idea/modules/intellijLift-build.iml" />
     </modules>

@@ -26,16 +26,10 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+    <fileTypeFactory implementation="intellij.lift.LiftFileTypeFactory"/>
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
   </actions>
-
-  <module-components>
-    <component>
-      <!-- TODO: I AM ABSOLUTELY NOT SURE WHAT IS SUPPOSED TO BE HERE BELOW -->
-      <implementation-class>intellij.lift.LiftLanguage</implementation-class>
-    </component>
-  </module-components>
 </idea-plugin>
