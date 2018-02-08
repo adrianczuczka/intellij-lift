@@ -11,9 +11,11 @@ program    ::= (import)* (fundef)* EOF
 
 import    ::= "import" importable;
 
+importable ::= "lift.opencl"                # this way we allow for extensiblity - new "packages" can be added here
+
 fundef    ::= type IDENT "(" params ")" block    # function declaration
 
-type       ::= ("int" | "char" | "void" | "array[" type "]") ["*"]
+type       ::= "int" | "char" | "float" | "double" | "void" | "array[" type "]"
 
 params     ::= [ type ":" IDENT ("," type ":" IDENT)* ]
 

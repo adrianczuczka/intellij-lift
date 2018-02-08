@@ -16,5 +16,6 @@ case class RPAR() extends LiftToken
 case class LBRACKET() extends LiftToken
 case class RBRACKET() extends LiftToken
 case class COLON() extends LiftToken
-case class INCLUDE() extends LiftToken
+case class IMPORT() extends LiftToken
 case class PARAMS() extends LiftToken
+case class COMMENT() extends LiftToken

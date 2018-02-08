@@ -6,7 +6,7 @@ import intellij.lift.lexer._
 import scala.util.parsing.combinator.Parsers
 import scala.util.parsing.input.{NoPosition, Position, Reader}
 
-object LiftParser extends Parsers {
+class LiftParser extends Parsers {
   override type Elem = LiftToken
 
   class LiftTokenReader(tokens: Seq[LiftToken]) extends Reader[LiftToken] {
@@ -33,7 +33,7 @@ object LiftParser extends Parsers {
   }
 
   def include: Parser[Include] = positioned {
-    (INCLUDE() ~ identifier) ^^ {case _ ~ IDENTIFIER(source) => Include(source)}
+    (IMPORT() ~ identifier) ^^ {case _ ~ IDENTIFIER(source) => Include(source)}
   }
 
   def funcall: Parser[Funcall] = positioned{

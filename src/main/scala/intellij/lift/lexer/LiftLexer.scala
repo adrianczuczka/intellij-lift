@@ -1,8 +1,10 @@
 package intellij.lift.lexer
 
+import com.intellij.lexer.{FlexLexer, Lexer}
+
 import scala.util.parsing.combinator.RegexParsers
 
-object LiftLexer extends RegexParsers {
+class LiftLexer extends RegexParsers {
 
   def apply(code: String): Either[Unit, List[LiftToken]] = {
     parse(tokens, code) match {
@@ -12,7 +14,7 @@ object LiftLexer extends RegexParsers {
   }
 
   def tokens: Parser[List[LiftToken]] = {
-    phrase(rep1(include | definition | lpar | rpar | lbracket | rbracket | colon | lifttype
+    phrase(rep1(_import | definition | lpar | rpar | lbracket | rbracket | colon | lifttype
       | arrow | functionBody | integerValue | identifier)) ^^ { rawTokens => rawTokens}
   }
 
@@ -33,5 +35,5 @@ object LiftLexer extends RegexParsers {
   def lifttype = positioned {"int".r  ^^(str => TYPE(str))}
   def arrow = positioned {"=>".r  ^^(_ => ARROW())}
   def functionBody = positioned {"BODY" ^^(_ => FUNCTION_BODY())}
-  def include = positioned {"include"   ^^(_ => INCLUDE())}
+  def _import = positioned {"import"   ^^(_ => IMPORT())}
 }

@@ -25,8 +25,17 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <!-- File Type Factory -->
     <fileTypeFactory implementation="intellij.lift.LiftFileTypeFactory"/>
+
+    <!-- Parser -->
+    <lang.parserDefinition language="Lift" implementationClass="intellij.lift.parser.LiftParser"/>
+
+    <!-- Syntax Highlighter -->
+    <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlihgter.LiftSyntaxHighlighterFactory"/>
+
+    <!-- Colour Settings -->
+    <colorSettingsPage implementation="intellij.lift.highlihgter.LiftColourSettingsPage"/>
   </extensions>
 
   <actions>
