@@ -1,4 +1,4 @@
-package intellij.lift
+package intellij.lift.parser
 
 import com.intellij.lang.ParserDefinition.SpaceRequirements
 import com.intellij.lang.{ASTNode, ParserDefinition, PsiParser}
@@ -6,7 +6,7 @@ import com.intellij.lexer.Lexer
 import com.intellij.openapi.project.Project
 import com.intellij.psi.tree.{IFileElementType, TokenSet}
 import com.intellij.psi.{FileViewProvider, PsiElement, PsiFile, TokenType}
-import intellij.lift.parser.LiftParser
+import intellij.lift.{LiftFile, LiftLanguage, LiftLexerAdapter}
 
 object LiftParserDefinition{
   final val LiftParser = new LiftParser
@@ -14,7 +14,6 @@ object LiftParserDefinition{
 }
 
 class LiftParserDefinition extends ParserDefinition{
-  @NotNull
   def createLexer(project: Project): Lexer = {
     new LiftLexerAdapter
   }
@@ -27,27 +26,22 @@ class LiftParserDefinition extends ParserDefinition{
     new IFileElementType(LiftLanguage.Instance)
   }
 
-  @NotNull
   override def getWhitespaceTokens: TokenSet = {
     LiftParserDefinition.WhiteSpaces
   }
 
-  @NotNull
   def getCommentTokens: TokenSet = {
     TokenSet.EMPTY
   }
 
-  @NotNull
   def getStringLiteralElements: TokenSet = {
     TokenSet.EMPTY
   }
 
-  @NotNull
   def createElement(node: ASTNode): PsiElement = {
     Factory.createElement(node)
   }
 
-  @NotNull
   def createFile(viewProvider: FileViewProvider): PsiFile = {
     new LiftFile(viewProvider)
   }
