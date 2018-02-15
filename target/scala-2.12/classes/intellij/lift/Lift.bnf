@@ -1,0 +1,20 @@
+{
+  parserClass="intellij.lift.parser.LiftParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Lift"
+  psiImplClassSuffix="Impl"
+  psiPackage="intellij.lift.psi"
+  psiImplPackage="intellij.lift.psi.impl"
+
+  elementTypeHolderClass="intellij.lift.psi.LiftTypes"
+  elementTypeClass="intellij.lift.psi.LiftElementType"
+  tokenTypeClass="intellij.lift.psi.LiftTokenType"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

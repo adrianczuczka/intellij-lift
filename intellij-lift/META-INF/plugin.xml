@@ -29,16 +29,16 @@
     <fileTypeFactory implementation="intellij.lift.LiftFileTypeFactory"/>
 
     <!-- Parser -->
-    <lang.parserDefinition language="Lift" implementationClass="intellij.lift.parser.LiftParserDefinition"/>
+    <lang.parserDefinition language="Lift" implementationClass="intellij.lift.LiftParserDefinition"/>
 
     <!-- Syntax Highlighter -->
-    <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlihgter.LiftSyntaxHighlighterFactory"/>
+    <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlighter.LiftSyntaxHighlighterFactory"/>
 
-    <!-- Colour Settings -->
-    <colorSettingsPage implementation="intellij.lift.highlihgter.LiftColourSettingsPage"/>
+    <!--&lt;!&ndash; Colour Settings &ndash;&gt;-->
+    <!--<colorSettingsPage implementation="intellij.lift.highlihgter.LiftColourSettingsPage"/>-->
 
     <!-- Commenter -->
-    <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>
+    <!--<lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>-->
   </extensions>
 
   <actions>
