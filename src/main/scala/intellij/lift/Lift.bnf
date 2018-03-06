@@ -19,8 +19,10 @@ import      ::= IMPORT_KEYWORD IMPORTABLE GAP
 
 ident  ::= IDENTIFIER
 
-array_type ::= ARRAY LEFT_PAREN typ COMMA (ident | VALUE) RIGHT_PAREN
-             | (LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET)* TYPE
+value ::= NUMERIC_VALUE | BOOLEAN
+
+array_type ::= ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
+             | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
 
 typ ::= TYPE | array_type
 
@@ -35,13 +37,13 @@ stmt       ::= exp
 exp        ::= LEFT_PAREN exp RIGHT_PAREN
              | composed_funcall
              | funcall
+             | value
              | IDENTIFIER
-             | VALUE
 
 funcall      ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
 
 arguments ::= funcall
             | IDENTIFIER
-            | VALUE
+            | value
 
 composed_funcall ::= funcall COMPOSER funcall (COMPOSER funcall)*

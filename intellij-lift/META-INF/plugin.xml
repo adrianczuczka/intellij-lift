@@ -37,6 +37,8 @@
     <!--&lt;!&ndash; Colour Settings &ndash;&gt;-->
     <colorSettingsPage implementation="intellij.lift.highlighter.LiftColourSettingsPage"/>
 
+    <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>
+
     <!-- Commenter -->
     <!--<lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>-->
   </extensions>

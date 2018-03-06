@@ -54,9 +54,9 @@ class LiftLexer implements FlexLexer {
   /* The ZZ_CMAP_A table has 320 entries */
   static final char ZZ_CMAP_A[] = zzUnpackCMap(
     "\5\0\1\1\3\0\1\1\1\2\3\1\22\0\1\1\7\0\1\17\1\20\1\0\1\35\1\27\1\35\1\7\1\0"+
-    "\12\34\1\26\2\0\1\25\1\31\2\0\1\43\3\33\1\36\25\33\1\23\1\0\1\24\1\0\1\32"+
-    "\1\0\1\16\1\42\1\14\1\41\1\12\1\5\1\15\1\32\1\4\2\32\1\3\1\45\1\13\1\10\1"+
-    "\11\1\32\1\37\1\32\1\6\1\40\3\32\1\44\1\32\1\21\1\0\1\22\42\0\1\1\201\0\1"+
+    "\12\34\1\26\2\0\1\25\1\31\2\0\1\44\3\33\1\36\25\33\1\23\1\0\1\24\1\0\1\32"+
+    "\1\0\1\16\1\43\1\14\1\42\1\12\1\5\1\15\1\32\1\4\2\32\1\3\1\46\1\13\1\10\1"+
+    "\11\1\32\1\37\1\41\1\6\1\40\3\32\1\45\1\32\1\21\1\0\1\22\42\0\1\1\201\0\1"+
     "\30\35\0");
 
   /** 
@@ -65,15 +65,15 @@ class LiftLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\1\1\2\1\3\1\1\4\4\1\2\1\5\1\6"+
+    "\1\1\1\2\1\3\1\1\4\4\1\5\1\4\1\6"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\2\2\4\1\2\4\4\1\17\1\20\2\0"+
-    "\3\4\1\0\1\4\1\21\2\4\1\17\1\0\1\4"+
-    "\1\22\1\4\1\0\3\4\2\0\2\4\1\23\2\0"+
-    "\1\24\4\0\1\25\2\0";
+    "\1\5\1\17\1\2\2\4\1\2\6\4\1\17\1\20"+
+    "\2\0\3\4\1\0\1\4\1\21\4\4\1\17\1\0"+
+    "\1\4\1\22\1\4\1\0\2\4\1\23\1\4\2\0"+
+    "\2\4\1\24\2\0\1\25\4\0\1\26\2\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[64];
+    int [] result = new int[70];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -98,17 +98,18 @@ class LiftLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\46\0\114\0\162\0\230\0\276\0\344\0\u010a"+
-    "\0\u0130\0\46\0\46\0\46\0\46\0\46\0\46\0\u0156"+
-    "\0\46\0\46\0\46\0\u017c\0\u01a2\0\u01c8\0\u01ee\0\u0214"+
-    "\0\u023a\0\u0260\0\u0286\0\u02ac\0\u02d2\0\46\0\u02f8\0\u0130"+
-    "\0\u031e\0\u0344\0\u036a\0\u0390\0\u03b6\0\u010a\0\u03dc\0\u0402"+
-    "\0\u0428\0\u0428\0\u044e\0\u010a\0\u0474\0\u049a\0\u04c0\0\u04e6"+
-    "\0\u050c\0\u0532\0\u0558\0\u057e\0\u05a4\0\46\0\u05ca\0\u05f0"+
-    "\0\u010a\0\u0616\0\u063c\0\u0662\0\u0688\0\46\0\u06ae\0\u06d4";
+    "\0\0\0\47\0\116\0\165\0\234\0\303\0\352\0\u0111"+
+    "\0\u0138\0\u015f\0\47\0\47\0\47\0\47\0\47\0\47"+
+    "\0\u0186\0\47\0\47\0\47\0\u01ad\0\u01d4\0\u01fb\0\u0222"+
+    "\0\u0249\0\u0270\0\u0297\0\u02be\0\u02e5\0\u030c\0\u0333\0\u035a"+
+    "\0\47\0\u0381\0\u0138\0\u03a8\0\u03cf\0\u03f6\0\u041d\0\u0444"+
+    "\0\u015f\0\u046b\0\u0492\0\u04b9\0\u04e0\0\u0507\0\u0507\0\u052e"+
+    "\0\u015f\0\u0555\0\u057c\0\u05a3\0\u05ca\0\u015f\0\u05f1\0\u0618"+
+    "\0\u063f\0\u0666\0\u068d\0\47\0\u06b4\0\u06db\0\u015f\0\u0702"+
+    "\0\u0729\0\u0750\0\u0777\0\47\0\u079e\0\u07c5";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[64];
+    int [] result = new int[70];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -132,47 +133,53 @@ class LiftLexer implements FlexLexer {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11"+
-    "\7\10\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
-    "\1\21\1\22\1\23\1\2\1\10\1\2\1\24\1\25"+
-    "\1\2\2\10\1\26\1\27\1\30\2\10\47\0\1\3"+
-    "\1\4\44\0\2\4\46\0\1\10\1\31\2\10\1\0"+
-    "\7\10\13\0\3\10\1\0\10\10\3\0\4\10\1\0"+
-    "\3\10\1\32\3\10\13\0\3\10\1\0\7\10\1\33"+
-    "\3\0\1\34\3\10\1\0\7\10\13\0\3\10\1\0"+
-    "\10\10\3\0\4\10\1\0\7\10\13\0\3\10\1\0"+
-    "\10\10\34\0\1\35\42\0\1\36\23\0\1\35\2\0"+
-    "\1\37\21\0\1\24\1\0\1\37\16\0\1\40\24\0"+
-    "\1\24\14\0\4\10\1\0\1\41\1\10\1\42\4\10"+
-    "\13\0\3\10\1\0\10\10\3\0\4\10\1\0\1\43"+
-    "\6\10\13\0\3\10\1\0\10\10\37\0\1\44\11\0"+
-    "\2\10\1\45\1\10\1\0\7\10\13\0\3\10\1\0"+
-    "\10\10\3\0\3\10\1\46\1\0\7\10\13\0\3\10"+
-    "\1\0\10\10\3\0\4\10\1\0\1\10\1\47\5\10"+
-    "\13\0\3\10\1\0\10\10\3\0\4\10\1\0\1\50"+
-    "\6\10\13\0\3\10\1\0\10\10\12\0\1\37\21\0"+
-    "\1\35\1\0\1\37\43\0\1\51\1\52\13\0\4\10"+
-    "\1\0\7\10\13\0\3\10\1\0\2\10\1\53\5\10"+
-    "\3\0\2\10\1\54\1\10\1\0\7\10\13\0\3\10"+
-    "\1\0\10\10\3\0\4\10\1\0\1\55\6\10\13\0"+
-    "\3\10\1\0\10\10\37\0\1\56\11\0\3\10\1\57"+
-    "\1\0\7\10\13\0\3\10\1\0\10\10\3\0\4\10"+
-    "\1\0\1\60\6\10\13\0\3\10\1\0\10\10\3\0"+
-    "\4\10\1\0\6\10\1\32\13\0\3\10\1\0\10\10"+
-    "\34\0\1\51\14\0\4\10\1\0\7\10\13\0\3\10"+
-    "\1\0\4\10\1\61\3\10\3\0\1\46\3\10\1\0"+
-    "\7\10\13\0\3\10\1\0\10\10\16\0\1\62\32\0"+
-    "\4\10\1\63\7\10\13\0\3\10\1\0\10\10\3\0"+
-    "\4\10\1\0\7\10\13\0\3\10\1\0\1\10\1\64"+
-    "\6\10\3\0\1\65\3\10\1\0\7\10\13\0\3\10"+
-    "\1\0\10\10\44\0\1\66\6\0\1\67\2\0\1\70"+
-    "\40\0\3\10\1\71\1\0\7\10\13\0\3\10\1\0"+
-    "\10\10\3\0\4\10\1\0\2\10\1\46\4\10\13\0"+
-    "\3\10\1\0\10\10\11\0\1\72\45\0\1\73\51\0"+
-    "\1\74\42\0\1\75\51\0\1\76\42\0\1\77\46\0"+
-    "\1\100\34\0\1\76\42\0";
+    "\7\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
+    "\1\22\1\23\1\24\1\2\1\12\1\2\1\25\1\26"+
+    "\1\2\3\12\1\27\1\30\1\31\2\12\50\0\1\3"+
+    "\1\4\45\0\2\4\47\0\1\12\1\32\2\12\1\0"+
+    "\7\12\13\0\3\12\1\0\11\12\3\0\4\12\1\0"+
+    "\3\12\1\33\3\12\13\0\3\12\1\0\10\12\1\34"+
+    "\3\0\1\35\3\12\1\0\6\12\1\36\13\0\3\12"+
+    "\1\0\11\12\3\0\4\12\1\0\7\12\13\0\3\12"+
+    "\1\0\1\12\1\37\7\12\34\0\1\40\15\0\4\12"+
+    "\1\0\7\12\13\0\3\12\1\0\11\12\31\0\1\41"+
+    "\24\0\1\40\2\0\1\42\21\0\1\25\1\0\1\42"+
+    "\17\0\1\43\24\0\1\25\15\0\4\12\1\0\1\44"+
+    "\1\12\1\45\4\12\13\0\3\12\1\0\11\12\3\0"+
+    "\4\12\1\0\1\46\6\12\13\0\3\12\1\0\11\12"+
+    "\37\0\1\47\12\0\2\12\1\50\1\12\1\0\7\12"+
+    "\13\0\3\12\1\0\11\12\3\0\3\12\1\51\1\0"+
+    "\7\12\13\0\3\12\1\0\11\12\3\0\4\12\1\0"+
+    "\1\12\1\52\5\12\13\0\3\12\1\0\11\12\3\0"+
+    "\4\12\1\0\1\53\6\12\13\0\3\12\1\0\11\12"+
+    "\3\0\1\54\3\12\1\0\7\12\13\0\3\12\1\0"+
+    "\11\12\3\0\4\12\1\0\7\12\13\0\3\12\1\0"+
+    "\2\12\1\55\6\12\12\0\1\42\21\0\1\40\1\0"+
+    "\1\42\44\0\1\56\1\57\14\0\4\12\1\0\7\12"+
+    "\13\0\3\12\1\0\2\12\1\60\6\12\3\0\2\12"+
+    "\1\61\1\12\1\0\7\12\13\0\3\12\1\0\11\12"+
+    "\3\0\4\12\1\0\1\62\6\12\13\0\3\12\1\0"+
+    "\11\12\37\0\1\63\12\0\3\12\1\64\1\0\7\12"+
+    "\13\0\3\12\1\0\11\12\3\0\4\12\1\0\1\65"+
+    "\6\12\13\0\3\12\1\0\11\12\3\0\4\12\1\0"+
+    "\6\12\1\33\13\0\3\12\1\0\11\12\3\0\4\12"+
+    "\1\0\7\12\13\0\3\12\1\0\3\12\1\55\5\12"+
+    "\3\0\4\12\1\0\2\12\1\66\4\12\13\0\3\12"+
+    "\1\0\11\12\34\0\1\56\15\0\4\12\1\0\7\12"+
+    "\13\0\3\12\1\0\5\12\1\67\3\12\3\0\1\51"+
+    "\3\12\1\0\7\12\13\0\3\12\1\0\11\12\16\0"+
+    "\1\70\33\0\4\12\1\71\7\12\13\0\3\12\1\0"+
+    "\11\12\3\0\4\12\1\0\7\12\13\0\3\12\1\0"+
+    "\1\12\1\72\7\12\3\0\1\73\3\12\1\0\7\12"+
+    "\13\0\3\12\1\0\11\12\45\0\1\74\6\0\1\75"+
+    "\2\0\1\76\41\0\3\12\1\77\1\0\7\12\13\0"+
+    "\3\12\1\0\11\12\3\0\4\12\1\0\2\12\1\51"+
+    "\4\12\13\0\3\12\1\0\11\12\11\0\1\100\46\0"+
+    "\1\101\52\0\1\102\43\0\1\103\52\0\1\104\43\0"+
+    "\1\105\47\0\1\106\35\0\1\104\43\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1786];
+    int [] result = new int[2028];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -210,12 +217,12 @@ class LiftLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\1\1\11\7\1\6\11\1\1\3\11\12\1\1\11"+
-    "\2\0\3\1\1\0\5\1\1\0\3\1\1\0\3\1"+
+    "\1\1\1\11\10\1\6\11\1\1\3\11\14\1\1\11"+
+    "\2\0\3\1\1\0\7\1\1\0\3\1\1\0\4\1"+
     "\2\0\2\1\1\11\2\0\1\1\4\0\1\11\2\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[64];
+    int [] result = new int[70];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -532,107 +539,112 @@ class LiftLexer implements FlexLexer {
             { return LiftTypes.GAP;
             } 
             // fall through
-          case 22: break;
+          case 23: break;
           case 2: 
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 23: break;
+          case 24: break;
           case 3: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 24: break;
+          case 25: break;
           case 4: 
             { return LiftTypes.IDENTIFIER;
             } 
             // fall through
-          case 25: break;
-          case 5: 
-            { return LiftTypes.LEFT_PAREN;
-            } 
-            // fall through
           case 26: break;
-          case 6: 
-            { return LiftTypes.RIGHT_PAREN;
-            } 
-            // fall through
-          case 27: break;
-          case 7: 
-            { return LiftTypes.LEFT_BRACE;
-            } 
-            // fall through
-          case 28: break;
-          case 8: 
-            { return LiftTypes.RIGHT_BRACE;
-            } 
-            // fall through
-          case 29: break;
-          case 9: 
-            { return LiftTypes.LEFT_BRACKET;
-            } 
-            // fall through
-          case 30: break;
-          case 10: 
-            { return LiftTypes.RIGHT_BRACKET;
-            } 
-            // fall through
-          case 31: break;
-          case 11: 
-            { return LiftTypes.EQUAL;
-            } 
-            // fall through
-          case 32: break;
-          case 12: 
-            { return LiftTypes.COLON;
-            } 
-            // fall through
-          case 33: break;
-          case 13: 
-            { return LiftTypes.COMMA;
-            } 
-            // fall through
-          case 34: break;
-          case 14: 
+          case 5: 
             { return LiftTypes.COMPOSER;
             } 
             // fall through
+          case 27: break;
+          case 6: 
+            { return LiftTypes.LEFT_PAREN;
+            } 
+            // fall through
+          case 28: break;
+          case 7: 
+            { return LiftTypes.RIGHT_PAREN;
+            } 
+            // fall through
+          case 29: break;
+          case 8: 
+            { return LiftTypes.LEFT_BRACE;
+            } 
+            // fall through
+          case 30: break;
+          case 9: 
+            { return LiftTypes.RIGHT_BRACE;
+            } 
+            // fall through
+          case 31: break;
+          case 10: 
+            { return LiftTypes.LEFT_BRACKET;
+            } 
+            // fall through
+          case 32: break;
+          case 11: 
+            { return LiftTypes.RIGHT_BRACKET;
+            } 
+            // fall through
+          case 33: break;
+          case 12: 
+            { return LiftTypes.EQUAL;
+            } 
+            // fall through
+          case 34: break;
+          case 13: 
+            { return LiftTypes.COLON;
+            } 
+            // fall through
           case 35: break;
-          case 15: 
-            { return LiftTypes.VALUE;
+          case 14: 
+            { return LiftTypes.COMMA;
             } 
             // fall through
           case 36: break;
+          case 15: 
+            { return LiftTypes.NUMERIC_VALUE;
+            } 
+            // fall through
+          case 37: break;
           case 16: 
             { return LiftTypes.APPLICATOR;
             } 
             // fall through
-          case 37: break;
+          case 38: break;
           case 17: 
             { return LiftTypes.TYPE;
             } 
             // fall through
-          case 38: break;
+          case 39: break;
           case 18: 
             { return LiftTypes.DEFINITION;
             } 
             // fall through
-          case 39: break;
-          case 19: 
-            { return LiftTypes.ARRAY;
-            } 
-            // fall through
           case 40: break;
-          case 20: 
-            { return LiftTypes.IMPORT_KEYWORD;
+          case 19: 
+            { return LiftTypes.BOOLEAN;
             } 
             // fall through
           case 41: break;
-          case 21: 
-            { return LiftTypes.IMPORTABLE;
+          case 20: 
+            { return LiftTypes.ARRAY;
             } 
             // fall through
           case 42: break;
+          case 21: 
+            { return LiftTypes.IMPORT_KEYWORD;
+            } 
+            // fall through
+          case 43: break;
+          case 22: 
+            { return LiftTypes.IMPORTABLE;
+            } 
+            // fall through
+          case 44: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

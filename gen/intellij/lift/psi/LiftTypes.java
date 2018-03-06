@@ -20,9 +20,11 @@ public interface LiftTypes {
   IElementType PARAMS = new LiftElementType("PARAMS");
   IElementType STMT = new LiftElementType("STMT");
   IElementType TYP = new LiftElementType("TYP");
+  IElementType VALUE = new LiftElementType("VALUE");
 
   IElementType APPLICATOR = new LiftTokenType("APPLICATOR");
   IElementType ARRAY = new LiftTokenType("ARRAY");
+  IElementType BOOLEAN = new LiftTokenType("BOOLEAN");
   IElementType COLON = new LiftTokenType("COLON");
   IElementType COMMA = new LiftTokenType("COMMA");
   IElementType COMPOSER = new LiftTokenType("COMPOSER");
@@ -35,11 +37,11 @@ public interface LiftTypes {
   IElementType LEFT_BRACE = new LiftTokenType("LEFT_BRACE");
   IElementType LEFT_BRACKET = new LiftTokenType("LEFT_BRACKET");
   IElementType LEFT_PAREN = new LiftTokenType("LEFT_PAREN");
+  IElementType NUMERIC_VALUE = new LiftTokenType("NUMERIC_VALUE");
   IElementType RIGHT_BRACE = new LiftTokenType("RIGHT_BRACE");
   IElementType RIGHT_BRACKET = new LiftTokenType("RIGHT_BRACKET");
   IElementType RIGHT_PAREN = new LiftTokenType("RIGHT_PAREN");
   IElementType TYPE = new LiftTokenType("TYPE");
-  IElementType VALUE = new LiftTokenType("VALUE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
@@ -79,6 +81,9 @@ public interface LiftTypes {
       }
       else if (type == TYP) {
         return new LiftTypImpl(node);
+      }
+      else if (type == VALUE) {
+        return new LiftValueImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

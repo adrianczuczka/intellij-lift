@@ -11,43 +11,19 @@ import static intellij.lift.psi.LiftTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import intellij.lift.psi.*;
 
-public class LiftExpImpl extends ASTWrapperPsiElement implements LiftExp {
+public class LiftValueImpl extends ASTWrapperPsiElement implements LiftValue {
 
-  public LiftExpImpl(ASTNode node) {
+  public LiftValueImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiftVisitor visitor) {
-    visitor.visitExp(this);
+    visitor.visitValue(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof LiftVisitor) accept((LiftVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public LiftComposedFuncall getComposedFuncall() {
-    return findChildByClass(LiftComposedFuncall.class);
-  }
-
-  @Override
-  @Nullable
-  public LiftExp getExp() {
-    return findChildByClass(LiftExp.class);
-  }
-
-  @Override
-  @Nullable
-  public LiftFuncall getFuncall() {
-    return findChildByClass(LiftFuncall.class);
-  }
-
-  @Override
-  @Nullable
-  public LiftValue getValue() {
-    return findChildByClass(LiftValue.class);
   }
 
 }

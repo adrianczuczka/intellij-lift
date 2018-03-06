@@ -17,10 +17,12 @@ object LiftSyntaxHighlighter{
   final val Comment = createTextAttributesKey("LIFT_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
   final val BadCharacter = createTextAttributesKey("LIFT_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
   final val Identifier = createTextAttributesKey("LIFT_IDENTIFIER", DefaultLanguageHighlighterColors.LOCAL_VARIABLE)
+  final val Numeric = createTextAttributesKey("LIFT_NUMERIC_VALUE", DefaultLanguageHighlighterColors.NUMBER)
 
   // keywords
   final val Keyword = createTextAttributesKey("LIFT_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
   final val Operator = createTextAttributesKey("LIFT_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
+  final val FunctionDeclaration = createTextAttributesKey("LIFT_FUN_NAME", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
 
   // punctuation
   final val Parens = createTextAttributesKey("LIFT_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
@@ -50,6 +52,7 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
       case LiftTypes.IDENTIFIER => pack(Identifier)
       case et if ReservedKeywords.contains(et) => pack(Keyword)
       case et if ReservedOperators.contains(et) => pack(Operator)
+      case LiftTypes.NUMERIC_VALUE | LiftTypes.BOOLEAN => pack(Numeric)
       case _ => pack(null)
     }
   }

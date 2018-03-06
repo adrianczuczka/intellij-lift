@@ -59,6 +59,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == TYP) {
       r = typ(b, 0);
     }
+    else if (t == VALUE) {
+      r = value(b, 0);
+    }
     else {
       r = parse_root_(t, b, 0);
     }
@@ -72,22 +75,21 @@ public class LiftParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // funcall
   //             | IDENTIFIER
-  //             | VALUE
+  //             | value
   public static boolean arguments(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arguments")) return false;
-    if (!nextTokenIs(b, "<arguments>", IDENTIFIER, VALUE)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARGUMENTS, "<arguments>");
     r = funcall(b, l + 1);
     if (!r) r = consumeToken(b, IDENTIFIER);
-    if (!r) r = consumeToken(b, VALUE);
+    if (!r) r = value(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // ARRAY LEFT_PAREN typ COMMA (ident | VALUE) RIGHT_PAREN
-  //              | (LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET)* TYPE
+  // ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
+  //              | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
   public static boolean array_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type")) return false;
     boolean r;
@@ -98,7 +100,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ARRAY LEFT_PAREN typ COMMA (ident | VALUE) RIGHT_PAREN
+  // ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
   private static boolean array_type_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_0")) return false;
     boolean r;
@@ -112,18 +114,18 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // ident | VALUE
+  // ident | NUMERIC_VALUE
   private static boolean array_type_0_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_0_4")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = ident(b, l + 1);
-    if (!r) r = consumeToken(b, VALUE);
+    if (!r) r = consumeToken(b, NUMERIC_VALUE);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // (LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET)* TYPE
+  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
   private static boolean array_type_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1")) return false;
     boolean r;
@@ -134,7 +136,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET)*
+  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)*
   private static boolean array_type_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0")) return false;
     int c = current_position_(b);
@@ -146,7 +148,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET
+  // LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET
   private static boolean array_type_1_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0_0")) return false;
     boolean r;
@@ -158,20 +160,20 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (IDENTIFIER | VALUE)?
+  // (IDENTIFIER | NUMERIC_VALUE)?
   private static boolean array_type_1_0_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0_0_1")) return false;
     array_type_1_0_0_1_0(b, l + 1);
     return true;
   }
 
-  // IDENTIFIER | VALUE
+  // IDENTIFIER | NUMERIC_VALUE
   private static boolean array_type_1_0_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, IDENTIFIER);
-    if (!r) r = consumeToken(b, VALUE);
+    if (!r) r = consumeToken(b, NUMERIC_VALUE);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -273,8 +275,8 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // LEFT_PAREN exp RIGHT_PAREN
   //              | composed_funcall
   //              | funcall
+  //              | value
   //              | IDENTIFIER
-  //              | VALUE
   public static boolean exp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exp")) return false;
     boolean r;
@@ -282,8 +284,8 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = exp_0(b, l + 1);
     if (!r) r = composed_funcall(b, l + 1);
     if (!r) r = funcall(b, l + 1);
+    if (!r) r = value(b, l + 1);
     if (!r) r = consumeToken(b, IDENTIFIER);
-    if (!r) r = consumeToken(b, VALUE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -563,6 +565,19 @@ public class LiftParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, TYP, "<typ>");
     r = consumeToken(b, TYPE);
     if (!r) r = array_type(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // NUMERIC_VALUE | BOOLEAN
+  public static boolean value(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "value")) return false;
+    if (!nextTokenIs(b, "<value>", BOOLEAN, NUMERIC_VALUE)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, VALUE, "<value>");
+    r = consumeToken(b, NUMERIC_VALUE);
+    if (!r) r = consumeToken(b, BOOLEAN);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

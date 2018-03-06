@@ -32,7 +32,7 @@ right_bracket       = "]"
 equal               = "="
 colon               = ":"
 comma               = ","
-composer            = "•"
+composer            = "•" | "."
 applicator          = "=>"
 
 
@@ -43,8 +43,10 @@ digit               = [0-9]
 int                 = {digit}*
 float               = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][-+]?[0-9]+)?
 double              = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)
-bool                = "true" | "false"
-primitive_value     = {int} | {bool} | {double} | {float}
+true                = "true"
+false               = "false"
+bool                = {true} | {false}
+numeric_value       = {int} | {double} | {float}
 
 
 int_type            = "int"
@@ -81,7 +83,8 @@ identifier          = {small} ({small} | {large} | {digit})*
 {applicator}                        { return LiftTypes.APPLICATOR; }
 {type}                              { return LiftTypes.TYPE; }
 
+{bool}                              { return LiftTypes.BOOLEAN; }
+{numeric_value}                     { return LiftTypes.NUMERIC_VALUE; }
 {identifier}                        { return LiftTypes.IDENTIFIER; }
-{primitive_value}                   { return LiftTypes.VALUE; }
 
 [^]                                 { return TokenType.BAD_CHARACTER; }

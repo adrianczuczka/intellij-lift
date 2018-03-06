@@ -15,8 +15,9 @@ object LiftParserDefinition {
   final val File = new IFileElementType(LiftLanguage.Instance)
   final val Comments = TokenSet.create(TokenType.WHITE_SPACE)
   final val WhiteSpaces = TokenSet.create(TokenType.WHITE_SPACE)
-  final val ReservedKeywords = TokenSet.create(IMPORT_KEYWORD, DEFINITION)
+  final val ReservedKeywords = TokenSet.create(IMPORT_KEYWORD, DEFINITION, ARRAY)
   final val ReservedOperators = TokenSet.create(EQUAL, APPLICATOR, COMPOSER, COLON, COMMA)
+  final val Literals = TokenSet.create(NUMERIC_VALUE, BOOLEAN)
 
 }
 

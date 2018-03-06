@@ -32,4 +32,10 @@ public class LiftArgumentsImpl extends ASTWrapperPsiElement implements LiftArgum
     return findChildByClass(LiftFuncall.class);
   }
 
+  @Override
+  @Nullable
+  public LiftValue getValue() {
+    return findChildByClass(LiftValue.class);
+  }
+
 }
