@@ -10,13 +10,22 @@ import com.intellij.psi.tree.IElementType
 import intellij.lift.LiftLexerAdapter
 import intellij.lift.psi.LiftTypes
 import org.jetbrains.annotations.NotNull
+import intellij.lift.LiftParserDefinition._
 
 object LiftSyntaxHighlighter{
-  final val Separator = createTextAttributesKey("LIFT_SEPARATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
-  final val Key = createTextAttributesKey("LIFT_KEY", DefaultLanguageHighlighterColors.KEYWORD)
-  final val Value = createTextAttributesKey("LIFT_VALUE", DefaultLanguageHighlighterColors.STRING)
+  final val Importable = createTextAttributesKey("LIFT_IMPORTABLE", DefaultLanguageHighlighterColors.STRING)
   final val Comment = createTextAttributesKey("LIFT_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
   final val BadCharacter = createTextAttributesKey("LIFT_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
+  final val Identifier = createTextAttributesKey("LIFT_IDENTIFIER", DefaultLanguageHighlighterColors.LOCAL_VARIABLE)
+
+  // keywords
+  final val Keyword = createTextAttributesKey("LIFT_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
+  final val Operator = createTextAttributesKey("LIFT_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
+
+  // punctuation
+  final val Parens = createTextAttributesKey("LIFT_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
+  final val Braces = createTextAttributesKey("LIFT_BRACES", DefaultLanguageHighlighterColors.BRACES)
+  final val Brackets = createTextAttributesKey("LIFT_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
 }
 
 class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
@@ -34,10 +43,13 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
 
     iElementType match {
       case TokenType.BAD_CHARACTER => pack(BadCharacter)
-      case LiftTypes.SEPARATOR => pack(Separator)
-      case LiftTypes.KEY => pack(Key)
-      case LiftTypes.VALUE => pack(Value)
-      case LiftTypes.COMMENT => pack(Comment)
+      case LiftTypes.IMPORTABLE => pack(Importable)
+      case LiftTypes.LEFT_PAREN | LiftTypes.RIGHT_PAREN => pack(Parens)
+      case LiftTypes.LEFT_BRACE | LiftTypes.RIGHT_BRACE => pack(Braces)
+      case LiftTypes.LEFT_BRACKET | LiftTypes.RIGHT_BRACKET => pack(Brackets)
+      case LiftTypes.IDENTIFIER => pack(Identifier)
+      case et if ReservedKeywords.contains(et) => pack(Keyword)
+      case et if ReservedOperators.contains(et) => pack(Operator)
       case _ => pack(null)
     }
   }

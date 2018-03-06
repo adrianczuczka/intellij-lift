@@ -11,26 +11,31 @@ program    ::= (import)* (fundef)* EOF
 
 import    ::= "import" importable;
 
-importable ::= "lift.opencl"                # this way we allow for extensiblity - new "packages" can be added here
+importable ::= "lift.opencl"                                        # this way we allow for extensibility
+                                                                    # new "packages" can be added here
 
-fundef    ::= type IDENT "(" params ")" block    # function declaration
 
-type       ::= "int" | "char" | "float" | "double" | "void" | "array[" type "]"
+fundef    ::= "def" IDENTIFIER "(" params ") =" block               # function declaration
 
-params     ::= [ type ":" IDENT ("," type ":" IDENT)* ]
-
-stmt       ::= block
-             | "return" [exp] ";"                    # return
-             | exp "=" exp ";"                       # assignment
-             | exp ";"                               # expression statement, e.g. a function call
+params     ::= [ IDENTIFIER ":" type ("," IDENTIFIER ":" type)* ]
 
 block      ::= "{" (stmt)* "}"
 
+stmt       ::= exp ";"                                              # expression statement, e.g. a function call
+             | exp "=" exp ";"                                      # assignment - should be applicable via lambdas
+
+type       ::= "Int" | "Float" | "Double" | "Long" | "Array(" type "," exp ")"
+             # syntactic sugar for Arrays:
+             |  "[" (IDENTIFIER | INT_LITERAL) "]" ("[" (IDENTIFIER | INT_LITERAL) "]")* type
+
 exp        ::= "(" exp ")"
-             | (IDENT | INT_LITERAL)
-             | CHAR_LITERAL
-             | STRING_LITERAL
+             | IDENTIFIER
+             | INT_LITERAL
              | funcall
 
-funcall      ::= IDENT "(" [ exp ("," exp)* ] ")"
+funcall      ::= IDENTIFIER "(" [ exp ("," exp)* ] ")"
+
+IDENTIFIER   ::= "a-z|A-Z"
+
+INT_LITERAL  ::=
 

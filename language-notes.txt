@@ -1,0 +1,53 @@
+def dotProduct(left: Array(Float, N), right: Array(Float, N)): int = {
+	
+	join(
+		mapWrg(join(mapLcl(toGlobal(mapSeq(id))join(split(1024) $ zip(left, right)
+}
+
+
+val dotProductSimple = fun(ArrayTypeWSWC(Float, N), ArrayTypeWSWC(Float, N), (left, right) => {
+      Join() o MapWrg(
+        Join() o  MapLcl(toGlobal(MapSeq(id)) o ReduceSeq(add, 0.0f) o MapSeq(mult)) o Split(4)
+      ) o Split(1024) $ Zip(left, right)
+    })
+
+def dotProductSimple(left: [n]float, right: [n]float) = {
+      join() • mapWrg(
+        join() •  mapLcl(toGlobal(mapSeq(id)) • reduceSeq(add, 0.0f) • mapSeq(mult)) • split(4)
+      ) • split(1024) $ zip(left, right)
+    }
+
+
+
+////////////////////////////////////////////// FUNDEF //////////////////////////////////////////////
+
+def identifierCamelCased(arg: TYPE)[: TYPE] [=] {
+	
+}
+
+
+////////////////////////////////////////////// FUNCALL //////////////////////////////////////////////
+
+funCall(EXPR*)
+
+WHERE
+
+EXPR ==> another funCall || arg[s] 
+
+
+////////////////////////////////////////////// TYPES //////////////////////////////////////////////
+
+Float 						<==>	float
+Long						<==>	long
+Int							<==> 	int
+Double						<==>	double
+Boolean						<==>	boolean
+
+
+ArrayTypeWSWC(TYPE, M, N) 	<==>	ArrayWSWC(TYPE, _, _)
+ArrayTypeWS(TYPE, N)		<==>	ArrayWS(TYPE, _)			====> Array(TYPE, _) for simplicity a.k.a. by default Size == Capacity
+ArrayTypeWC(TYPE, N)		<==>	ArrayWC(TYPE, _)
+possible syntactic sugar could be something like 
+[n]TYPE 					<==>	Array(TYPE, _)
+
+Tuple(_, _) // TODO

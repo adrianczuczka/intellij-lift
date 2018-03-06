@@ -15,30 +15,73 @@ import com.intellij.psi.TokenType;
 %eof{  return;
 %eof}
 
-CRLF=\R
-WHITE_SPACE=[\ \n\t\f]
-FIRST_VALUE_CHARACTER=[^ \n\f\\] | "\\"{CRLF} | "\\".
-VALUE_CHARACTER=[^\n\f\\] | "\\"{CRLF} | "\\".
-END_OF_LINE_COMMENT=("#"|"!")[^\r\n]*
-SEPARATOR=[:=]
-KEY_CHARACTER=[^:=\ \n\t\f\\] | "\\ "
+newline             = \r|\n|\r\n
+unispace            = \x05
+white_char          = [\ \t\f\x0B\ \x0D ] | {unispace}
+white_space         = {white_char}+
 
-%state WAITING_VALUE
+gap                 = ({white_space}|{newline})*
+importable          = "lift.opencl" | "lift.fpga"
+
+left_paren          = "("
+right_paren         = ")"
+left_brace          = "{"
+right_brace         = "}"
+left_bracket        = "["
+right_bracket       = "]"
+equal               = "="
+colon               = ":"
+comma               = ","
+composer            = "•"
+applicator          = "=>"
+
+
+small               = [a-z_]
+large               = [A-Z]
+digit               = [0-9]
+
+int                 = {digit}*
+float               = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][-+]?[0-9]+)?
+double              = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)
+bool                = "true" | "false"
+primitive_value     = {int} | {bool} | {double} | {float}
+
+
+int_type            = "int"
+double_type         = "double"
+float_type          = "float"
+bool_type           = "bool"
+array               = "Array"
+type                = {int_type} | {bool_type} | {float_type} | {double_type}
+
+identifier          = {small} ({small} | {large} | {digit})*
 
 %%
 
-<YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return LiftTypes.COMMENT; }
+{white_space}                       { return TokenType.WHITE_SPACE; }
+{gap}                               { return LiftTypes.GAP; }
 
-<YYINITIAL> {KEY_CHARACTER}+                                { yybegin(YYINITIAL); return LiftTypes.KEY; }
+"import"                            { return LiftTypes.IMPORT_KEYWORD; }
+{array}                             { return LiftTypes.ARRAY; }
 
-<YYINITIAL> {SEPARATOR}                                     { yybegin(WAITING_VALUE); return LiftTypes.SEPARATOR; }
+{importable}                        { return LiftTypes.IMPORTABLE; }
 
-<WAITING_VALUE> {CRLF}({CRLF}|{WHITE_SPACE})+               { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+"def"                               { return LiftTypes.DEFINITION; }
 
-<WAITING_VALUE> {WHITE_SPACE}+                              { yybegin(WAITING_VALUE); return TokenType.WHITE_SPACE; }
+{left_paren}                        { return LiftTypes.LEFT_PAREN; }
+{right_paren}                       { return LiftTypes.RIGHT_PAREN; }
+{left_brace}                        { return LiftTypes.LEFT_BRACE; }
+{right_brace}                       { return LiftTypes.RIGHT_BRACE; }
+{left_bracket}                      { return LiftTypes.LEFT_BRACKET; }
+{right_bracket}                     { return LiftTypes.RIGHT_BRACKET; }
+{comma}                             { return LiftTypes.COMMA; }
+{colon}                             { return LiftTypes.COLON; }
+{equal}                             { return LiftTypes.EQUAL; }
+{composer}                          { return LiftTypes.COMPOSER; }
+{applicator}                        { return LiftTypes.APPLICATOR; }
+{type}                              { return LiftTypes.TYPE; }
 
-<WAITING_VALUE> {FIRST_VALUE_CHARACTER}{VALUE_CHARACTER}*   { yybegin(YYINITIAL); return LiftTypes.VALUE; }
+{identifier}                        { return LiftTypes.IDENTIFIER; }
+{primitive_value}                   { return LiftTypes.VALUE; }
 
-({CRLF}|{WHITE_SPACE})+                                     { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
-
-.                                                           { return TokenType.BAD_CHARACTER; }
+[^]                                 { return TokenType.BAD_CHARACTER; }

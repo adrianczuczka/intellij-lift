@@ -13,8 +13,35 @@
   tokenTypeClass="intellij.lift.psi.LiftTokenType"
 }
 
-simpleFile ::= item_*
+program     ::= (import)* (fundef)*
 
-private item_ ::= (property|COMMENT|CRLF)
+import      ::= IMPORT_KEYWORD IMPORTABLE GAP
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+ident  ::= IDENTIFIER
+
+array_type ::= ARRAY LEFT_PAREN typ COMMA (ident | VALUE) RIGHT_PAREN
+             | (LEFT_BRACKET (IDENTIFIER | VALUE)? RIGHT_BRACKET)* TYPE
+
+typ ::= TYPE | array_type
+
+fundef    ::= DEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
+
+params     ::= [ ident COLON typ (COMMA ident COLON typ)* ]
+
+block      ::= LEFT_BRACE GAP (stmt)* (APPLICATOR arguments)? GAP RIGHT_BRACE
+
+stmt       ::= exp
+
+exp        ::= LEFT_PAREN exp RIGHT_PAREN
+             | composed_funcall
+             | funcall
+             | IDENTIFIER
+             | VALUE
+
+funcall      ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
+
+arguments ::= funcall
+            | IDENTIFIER
+            | VALUE
+
+composed_funcall ::= funcall COMPOSER funcall (COMPOSER funcall)*
