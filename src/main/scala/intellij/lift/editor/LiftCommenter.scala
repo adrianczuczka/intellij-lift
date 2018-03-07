@@ -6,23 +6,23 @@ import com.intellij.psi.tree.IElementType
 
 class LiftCommenter extends CodeDocumentationAwareCommenter{
   override def getLineCommentPrefix: String = {
-    "#"
+    "//"
   }
 
   override def getBlockCommentPrefix: String = {
-    "\"\"\""
+    "/*"
   }
 
   override def getBlockCommentSuffix: String = {
-    "\"\"\""
+    "*/"
   }
 
   override def getCommentedBlockCommentPrefix: String = {
-    "\"\"\""
+    "/*"
   }
 
   override def getCommentedBlockCommentSuffix: String = {
-    "\"\"\""
+    "*/"
   }
 
   // TODO: Add the LiftType associated with line / block comments
@@ -49,6 +49,6 @@ class LiftCommenter extends CodeDocumentationAwareCommenter{
   }
 
   override def isDocumentationComment(psiComment: PsiComment): Boolean = {
-    psiComment.getText.startsWith("#") || psiComment.getText.startsWith("\"\"\"")
+    psiComment.getText.startsWith("//") || psiComment.getText.startsWith("/*")
   }
 }

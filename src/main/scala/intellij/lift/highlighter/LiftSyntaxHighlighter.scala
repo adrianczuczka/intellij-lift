@@ -45,6 +45,7 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
 
     iElementType match {
       case TokenType.BAD_CHARACTER => pack(BadCharacter)
+//      case LiftTypes.LINE_COMMENT => pack(Comment)
       case LiftTypes.IMPORTABLE => pack(Importable)
       case LiftTypes.LEFT_PAREN | LiftTypes.RIGHT_PAREN => pack(Parens)
       case LiftTypes.LEFT_BRACE | LiftTypes.RIGHT_BRACE => pack(Braces)

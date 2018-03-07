@@ -19,6 +19,7 @@ newline             = \r|\n|\r\n
 unispace            = \x05
 white_char          = [\ \t\f\x0B\ \x0D ] | {unispace}
 white_space         = {white_char}+
+//line_comment        =("//")[^\r\n]*
 
 gap                 = ({white_space}|{newline})*
 importable          = "lift.opencl" | "lift.fpga"
@@ -33,7 +34,8 @@ equal               = "="
 colon               = ":"
 comma               = ","
 composer            = "•" | "."
-applicator          = "=>"
+applicator          = "=>" | "$"
+name                = a/b
 
 
 small               = [a-z_]
@@ -60,6 +62,7 @@ identifier          = {small} ({small} | {large} | {digit})*
 
 %%
 
+//{line_comment}                      { return LiftTypes.LINE_COMMENT; }
 {white_space}                       { return TokenType.WHITE_SPACE; }
 {gap}                               { return LiftTypes.GAP; }
 
