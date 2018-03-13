@@ -33,16 +33,15 @@ right_bracket       = "]"
 equal               = "="
 colon               = ":"
 comma               = ","
-composer            = "•" | "."
-applicator          = "=>" | "$"
-name                = a/b
+composer            = /*"•" | */"."
+applicator          = /*"=>" | */"$"
 
 
 small               = [a-z_]
 large               = [A-Z]
 digit               = [0-9]
 
-int                 = {digit}*
+int                 = [-]?[1-9]{digit}*
 float               = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][-+]?[0-9]+)?
 double              = [-+]?([0-9]+(\.[0-9]*)?|\.[0-9]+)
 true                = "true"
@@ -56,6 +55,7 @@ double_type         = "double"
 float_type          = "float"
 bool_type           = "bool"
 array               = "Array"
+tuple               = "Tuple"
 type                = {int_type} | {bool_type} | {float_type} | {double_type}
 
 identifier          = {small} ({small} | {large} | {digit})*
@@ -68,6 +68,7 @@ identifier          = {small} ({small} | {large} | {digit})*
 
 "import"                            { return LiftTypes.IMPORT_KEYWORD; }
 {array}                             { return LiftTypes.ARRAY; }
+{tuple}                             { return LiftTypes.TUPLE; }
 
 {importable}                        { return LiftTypes.IMPORTABLE; }
 

@@ -11,14 +11,14 @@ import static intellij.lift.psi.LiftTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import intellij.lift.psi.*;
 
-public class LiftTypImpl extends ASTWrapperPsiElement implements LiftTyp {
+public class LiftTupleTypeImpl extends ASTWrapperPsiElement implements LiftTupleType {
 
-  public LiftTypImpl(ASTNode node) {
+  public LiftTupleTypeImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull LiftVisitor visitor) {
-    visitor.visitTyp(this);
+    visitor.visitTupleType(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -27,15 +27,9 @@ public class LiftTypImpl extends ASTWrapperPsiElement implements LiftTyp {
   }
 
   @Override
-  @Nullable
-  public LiftArrayType getArrayType() {
-    return findChildByClass(LiftArrayType.class);
-  }
-
-  @Override
-  @Nullable
-  public LiftTupleType getTupleType() {
-    return findChildByClass(LiftTupleType.class);
+  @NotNull
+  public List<LiftExp> getExpList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiftExp.class);
   }
 
 }

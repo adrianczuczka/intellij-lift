@@ -19,6 +19,7 @@ public interface LiftTypes {
   IElementType IMPORT = new LiftElementType("IMPORT");
   IElementType PARAMS = new LiftElementType("PARAMS");
   IElementType STMT = new LiftElementType("STMT");
+  IElementType TUPLE_TYPE = new LiftElementType("TUPLE_TYPE");
   IElementType TYP = new LiftElementType("TYP");
   IElementType VALUE = new LiftElementType("VALUE");
 
@@ -41,6 +42,7 @@ public interface LiftTypes {
   IElementType RIGHT_BRACE = new LiftTokenType("RIGHT_BRACE");
   IElementType RIGHT_BRACKET = new LiftTokenType("RIGHT_BRACKET");
   IElementType RIGHT_PAREN = new LiftTokenType("RIGHT_PAREN");
+  IElementType TUPLE = new LiftTokenType("TUPLE");
   IElementType TYPE = new LiftTokenType("TYPE");
 
   class Factory {
@@ -78,6 +80,9 @@ public interface LiftTypes {
       }
       else if (type == STMT) {
         return new LiftStmtImpl(node);
+      }
+      else if (type == TUPLE_TYPE) {
+        return new LiftTupleTypeImpl(node);
       }
       else if (type == TYP) {
         return new LiftTypImpl(node);

@@ -38,10 +38,11 @@ class LiftColourSettingsPage extends ColorSettingsPage{
   }
 
   override def getDemoText: String = {
-    "import lift.opencl\n\ndef dotProduct(left: [n]float, right: [n]float) = {\n" +
-      "    join() • mapWrg(\n" +
-      "        join() • mapLcl(toGlobal(mapSeq(id)) • reduceSeq(add, 0.0) • mapSeq(mult)) • split(4)\n" +
-      "    ) • split(1024) => zip(left, right)\n" +
+    "import lift.opencl\n\n" +
+      "def dotProduct(left: [n]float, right: [n]float) = {\n" +
+      "    join() . mapWrg(\n" +
+      "        join() . mapLcl(toGlobal(mapSeq(id)) . reduceSeq(add, 0.0) . mapSeq(mult)) . split(4)\n" +
+      "    ) . split(1024) $ zip(left, right)\n" +
       "}"
   }
 

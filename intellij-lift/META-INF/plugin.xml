@@ -34,7 +34,7 @@
     <!-- Syntax Highlighter -->
     <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlighter.LiftSyntaxHighlighterFactory"/>
 
-    <!--&lt;!&ndash; Colour Settings &ndash;&gt;-->
+    <!-- Colour Settings -->
     <colorSettingsPage implementation="intellij.lift.highlighter.LiftColourSettingsPage"/>
 
     <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>

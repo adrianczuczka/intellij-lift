@@ -56,6 +56,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == STMT) {
       r = stmt(b, 0);
     }
+    else if (t == TUPLE_TYPE) {
+      r = tuple_type(b, 0);
+    }
     else if (t == TYP) {
       r = typ(b, 0);
     }
@@ -74,8 +77,8 @@ public class LiftParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // funcall
-  //             | IDENTIFIER
-  //             | value
+  //                       | IDENTIFIER
+  //                       | value
   public static boolean arguments(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arguments")) return false;
     boolean r;
@@ -89,9 +92,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
-  //              | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
+  //                       | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)+ TYPE
   public static boolean array_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type")) return false;
+    if (!nextTokenIs(b, "<array type>", ARRAY, LEFT_BRACKET)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARRAY_TYPE, "<array type>");
     r = array_type_0(b, l + 1);
@@ -125,7 +129,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
+  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)+ TYPE
   private static boolean array_type_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1")) return false;
     boolean r;
@@ -136,16 +140,20 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)*
+  // (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)+
   private static boolean array_type_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = array_type_1_0_0(b, l + 1);
     int c = current_position_(b);
-    while (true) {
+    while (r) {
       if (!array_type_1_0_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "array_type_1_0", c)) break;
       c = current_position_(b);
     }
-    return true;
+    exit_section_(b, m, null, r);
+    return r;
   }
 
   // LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET
@@ -273,10 +281,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // LEFT_PAREN exp RIGHT_PAREN
-  //              | composed_funcall
-  //              | funcall
-  //              | value
-  //              | IDENTIFIER
+  //                       | composed_funcall
+  //                       | funcall
+  //                       | value
+  //                       | IDENTIFIER
   public static boolean exp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exp")) return false;
     boolean r;
@@ -558,13 +566,46 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TYPE | array_type
+  // TUPLE LEFT_PAREN exp COMMA exp+ RIGHT_PAREN
+  public static boolean tuple_type(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tuple_type")) return false;
+    if (!nextTokenIs(b, TUPLE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, TUPLE, LEFT_PAREN);
+    r = r && exp(b, l + 1);
+    r = r && consumeToken(b, COMMA);
+    r = r && tuple_type_4(b, l + 1);
+    r = r && consumeToken(b, RIGHT_PAREN);
+    exit_section_(b, m, TUPLE_TYPE, r);
+    return r;
+  }
+
+  // exp+
+  private static boolean tuple_type_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tuple_type_4")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = exp(b, l + 1);
+    int c = current_position_(b);
+    while (r) {
+      if (!exp(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "tuple_type_4", c)) break;
+      c = current_position_(b);
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // TYPE | array_type | tuple_type
   public static boolean typ(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "typ")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYP, "<typ>");
     r = consumeToken(b, TYPE);
     if (!r) r = array_type(b, l + 1);
+    if (!r) r = tuple_type(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

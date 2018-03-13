@@ -13,37 +13,40 @@
   tokenTypeClass="intellij.lift.psi.LiftTokenType"
 }
 
-program     ::= (import)* (fundef)*
+program             ::= (import)* (fundef)*
 
-import      ::= IMPORT_KEYWORD IMPORTABLE GAP
+import              ::= IMPORT_KEYWORD IMPORTABLE GAP
 
-ident  ::= IDENTIFIER
+ident               ::= IDENTIFIER
 
-value ::= NUMERIC_VALUE | BOOLEAN
+value               ::= NUMERIC_VALUE | BOOLEAN
 
-array_type ::= ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
-             | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)* TYPE
+array_type          ::= ARRAY LEFT_PAREN typ COMMA (ident | NUMERIC_VALUE) RIGHT_PAREN
+                      | (LEFT_BRACKET (IDENTIFIER | NUMERIC_VALUE)? RIGHT_BRACKET)+ TYPE
 
-typ ::= TYPE | array_type
+tuple_type          ::= TUPLE LEFT_PAREN exp COMMA exp+ RIGHT_PAREN
+//                      | LEFT_PAREN exp COMMA exp+ RIGHT_PAREN  ==> DELAY UNTIL VARIABLE ASSIGNMENT SUPPORTED?
 
-fundef    ::= DEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
+typ                 ::= TYPE | array_type | tuple_type
 
-params     ::= [ ident COLON typ (COMMA ident COLON typ)* ]
+fundef              ::= DEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
 
-block      ::= LEFT_BRACE GAP (stmt)* (APPLICATOR arguments)? GAP RIGHT_BRACE
+params              ::= [ ident COLON typ (COMMA ident COLON typ)* ]
 
-stmt       ::= exp
+block               ::= LEFT_BRACE GAP (stmt)* (APPLICATOR arguments)? GAP RIGHT_BRACE
 
-exp        ::= LEFT_PAREN exp RIGHT_PAREN
-             | composed_funcall
-             | funcall
-             | value
-             | IDENTIFIER
+stmt                ::= exp
 
-funcall      ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
+exp                 ::= LEFT_PAREN exp RIGHT_PAREN
+                      | composed_funcall
+                      | funcall
+                      | value
+                      | IDENTIFIER
 
-arguments ::= funcall
-            | IDENTIFIER
-            | value
+funcall             ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
 
-composed_funcall ::= funcall COMPOSER funcall (COMPOSER funcall)*
+arguments           ::= funcall
+                      | IDENTIFIER
+                      | value
+
+composed_funcall    ::= funcall COMPOSER funcall (COMPOSER funcall)*
