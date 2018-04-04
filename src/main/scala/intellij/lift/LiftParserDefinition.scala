@@ -16,7 +16,7 @@ object LiftParserDefinition {
   final val Comments = TokenSet.create(TokenType.WHITE_SPACE)
   final val WhiteSpaces = TokenSet.create(TokenType.WHITE_SPACE)
   final val ReservedKeywords = TokenSet.create(IMPORT_KEYWORD, DEFINITION)
-  final val ReservedOperators = TokenSet.create(EQUAL, APPLICATOR, COMPOSER, COLON, COMMA)
+  final val ReservedOperators = TokenSet.create(APPLICATOR, COMPOSER)
   final val ComposedTypes = TokenSet.create(ARRAY, TUPLE)
   final val Literals = TokenSet.create(NUMERIC_VALUE, BOOLEAN)
 

@@ -7,10 +7,10 @@ import com.intellij.openapi.editor.{DefaultLanguageHighlighterColors, Highlighte
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
-import intellij.lift.{LiftLanguage, LiftLexerAdapter}
+import intellij.lift.LiftLexerAdapter
+import intellij.lift.LiftParserDefinition._
 import intellij.lift.psi.LiftTypes
 import org.jetbrains.annotations.NotNull
-import intellij.lift.LiftParserDefinition._
 
 object LiftSyntaxHighlighter{
   final val Importable = createTextAttributesKey("LIFT_IMPORTABLE", DefaultLanguageHighlighterColors.STRING)
@@ -21,7 +21,7 @@ object LiftSyntaxHighlighter{
 
   // keywords
   final val Keyword = createTextAttributesKey("LIFT_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-  final val Operator = createTextAttributesKey("LIFT_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
+  final val Operator = createTextAttributesKey("LIFT_OPERATION", DefaultLanguageHighlighterColors.OPERATION_SIGN)
   final val FunctionDeclaration = createTextAttributesKey("LIFT_FUN_NAME", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
   final val Types = createTextAttributesKey("LIFT_TYPES", DefaultLanguageHighlighterColors.FUNCTION_CALL)
 
@@ -47,6 +47,7 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
     import intellij.lift.highlighter.LiftSyntaxHighlighter._
     iElementType match {
       case TokenType.BAD_CHARACTER => pack(BadCharacter)
+      case et if et == LiftTypes.COMMENT => pack(Comment)
       case LiftTypes.IMPORTABLE => pack(Importable)
       case LiftTypes.LEFT_PAREN | LiftTypes.RIGHT_PAREN => pack(Parens)
       case LiftTypes.LEFT_BRACE | LiftTypes.RIGHT_BRACE => pack(Braces)

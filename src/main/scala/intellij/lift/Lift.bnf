@@ -13,7 +13,7 @@
   tokenTypeClass="intellij.lift.psi.LiftTokenType"
 }
 
-program             ::= (import)* (fundef)*
+program             ::= (import)* (fundef)* COMMENT*
 
 import              ::= IMPORT_KEYWORD IMPORTABLE GAP
 
@@ -41,7 +41,10 @@ exp                 ::= LEFT_PAREN exp RIGHT_PAREN
                       | composed_funcall
                       | funcall
                       | value
+                      | symbol
                       | IDENTIFIER
+
+symbol              ::= OPERATION
 
 funcall             ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
 

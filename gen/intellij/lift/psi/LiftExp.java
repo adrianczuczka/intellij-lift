@@ -17,6 +17,9 @@ public interface LiftExp extends PsiElement {
   LiftFuncall getFuncall();
 
   @Nullable
+  LiftSymbol getSymbol();
+
+  @Nullable
   LiftValue getValue();
 
 }

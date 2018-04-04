@@ -19,6 +19,7 @@ public interface LiftTypes {
   IElementType IMPORT = new LiftElementType("IMPORT");
   IElementType PARAMS = new LiftElementType("PARAMS");
   IElementType STMT = new LiftElementType("STMT");
+  IElementType SYMBOL = new LiftElementType("SYMBOL");
   IElementType TUPLE_TYPE = new LiftElementType("TUPLE_TYPE");
   IElementType TYP = new LiftElementType("TYP");
   IElementType VALUE = new LiftElementType("VALUE");
@@ -28,6 +29,7 @@ public interface LiftTypes {
   IElementType BOOLEAN = new LiftTokenType("BOOLEAN");
   IElementType COLON = new LiftTokenType("COLON");
   IElementType COMMA = new LiftTokenType("COMMA");
+  IElementType COMMENT = new LiftTokenType("COMMENT");
   IElementType COMPOSER = new LiftTokenType("COMPOSER");
   IElementType DEFINITION = new LiftTokenType("DEFINITION");
   IElementType EQUAL = new LiftTokenType("EQUAL");
@@ -39,6 +41,7 @@ public interface LiftTypes {
   IElementType LEFT_BRACKET = new LiftTokenType("LEFT_BRACKET");
   IElementType LEFT_PAREN = new LiftTokenType("LEFT_PAREN");
   IElementType NUMERIC_VALUE = new LiftTokenType("NUMERIC_VALUE");
+  IElementType OPERATION = new LiftTokenType("OPERATION");
   IElementType RIGHT_BRACE = new LiftTokenType("RIGHT_BRACE");
   IElementType RIGHT_BRACKET = new LiftTokenType("RIGHT_BRACKET");
   IElementType RIGHT_PAREN = new LiftTokenType("RIGHT_PAREN");
@@ -80,6 +83,9 @@ public interface LiftTypes {
       }
       else if (type == STMT) {
         return new LiftStmtImpl(node);
+      }
+      else if (type == SYMBOL) {
+        return new LiftSymbolImpl(node);
       }
       else if (type == TUPLE_TYPE) {
         return new LiftTupleTypeImpl(node);

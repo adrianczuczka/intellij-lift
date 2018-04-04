@@ -19,10 +19,9 @@ newline             = \r|\n|\r\n
 unispace            = \x05
 white_char          = [\ \t\f\x0B\ \x0D ] | {unispace}
 white_space         = {white_char}+
-//line_comment        =("//")[^\r\n]*
 
 gap                 = ({white_space}|{newline})*
-importable          = "lift.opencl" | "lift.fpga"
+importable          = "lift." {identifier}
 
 left_paren          = "("
 right_paren         = ")"
@@ -33,8 +32,15 @@ right_bracket       = "]"
 equal               = "="
 colon               = ":"
 comma               = ","
-composer            = /*"•" | */"."
-applicator          = /*"=>" | */"$"
+composer            = "."
+applicator          = "$"
+slash               = "/"
+
+add                 = "+"
+subtract           = "-"
+multiply            = "*"
+divide              = "/"
+operation           = {add} | {subtract} | {multiply} | {divide}
 
 
 small               = [a-z_]
@@ -60,10 +66,14 @@ type                = {int_type} | {bool_type} | {float_type} | {double_type}
 
 identifier          = {small} ({small} | {large} | {digit})*
 
+comment             = {slash}{slash}[^\r\n]*
+
 %%
 
-//{line_comment}                      { return LiftTypes.LINE_COMMENT; }
+{comment}                           { return LiftTypes.COMMENT; }
+
 {white_space}                       { return TokenType.WHITE_SPACE; }
+
 {gap}                               { return LiftTypes.GAP; }
 
 "import"                            { return LiftTypes.IMPORT_KEYWORD; }
@@ -86,6 +96,7 @@ identifier          = {small} ({small} | {large} | {digit})*
 {composer}                          { return LiftTypes.COMPOSER; }
 {applicator}                        { return LiftTypes.APPLICATOR; }
 {type}                              { return LiftTypes.TYPE; }
+{operation}                         { return LiftTypes.OPERATION; }
 
 {bool}                              { return LiftTypes.BOOLEAN; }
 {numeric_value}                     { return LiftTypes.NUMERIC_VALUE; }

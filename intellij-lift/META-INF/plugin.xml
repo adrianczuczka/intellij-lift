@@ -34,13 +34,19 @@
     <!-- Syntax Highlighter -->
     <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlighter.LiftSyntaxHighlighterFactory"/>
 
+    <!-- Annotator -->
+    <annotator language="Lift" implementationClass="intellij.lift.annotator.LiftAnnotator"/>
+
     <!-- Colour Settings -->
     <colorSettingsPage implementation="intellij.lift.highlighter.LiftColourSettingsPage"/>
 
     <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>
 
+    <!-- Completion Contributor -->
+    <completion.contributor language="Lift" implementationClass="intellij.lift.completion.LiftCompletionContributor"/>
+
     <!-- Commenter -->
-    <!--<lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>-->
+    <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>
   </extensions>
 
   <actions>

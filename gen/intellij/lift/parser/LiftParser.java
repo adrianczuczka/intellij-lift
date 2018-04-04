@@ -56,6 +56,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == STMT) {
       r = stmt(b, 0);
     }
+    else if (t == SYMBOL) {
+      r = symbol(b, 0);
+    }
     else if (t == TUPLE_TYPE) {
       r = tuple_type(b, 0);
     }
@@ -284,6 +287,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
   //                       | composed_funcall
   //                       | funcall
   //                       | value
+  //                       | symbol
   //                       | IDENTIFIER
   public static boolean exp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exp")) return false;
@@ -293,6 +297,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     if (!r) r = composed_funcall(b, l + 1);
     if (!r) r = funcall(b, l + 1);
     if (!r) r = value(b, l + 1);
+    if (!r) r = symbol(b, l + 1);
     if (!r) r = consumeToken(b, IDENTIFIER);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -499,13 +504,14 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (import)* (fundef)*
+  // (import)* (fundef)* COMMENT*
   static boolean program(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = program_0(b, l + 1);
     r = r && program_1(b, l + 1);
+    r = r && program_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -554,6 +560,18 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return r;
   }
 
+  // COMMENT*
+  private static boolean program_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "program_2")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!consumeToken(b, COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "program_2", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
   /* ********************************************************** */
   // exp
   public static boolean stmt(PsiBuilder b, int l) {
@@ -562,6 +580,18 @@ public class LiftParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
     r = exp(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // OPERATION
+  public static boolean symbol(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "symbol")) return false;
+    if (!nextTokenIs(b, OPERATION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OPERATION);
+    exit_section_(b, m, SYMBOL, r);
     return r;
   }
 

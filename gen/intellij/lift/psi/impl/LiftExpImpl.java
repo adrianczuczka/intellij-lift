@@ -46,6 +46,12 @@ public class LiftExpImpl extends ASTWrapperPsiElement implements LiftExp {
 
   @Override
   @Nullable
+  public LiftSymbol getSymbol() {
+    return findChildByClass(LiftSymbol.class);
+  }
+
+  @Override
+  @Nullable
   public LiftValue getValue() {
     return findChildByClass(LiftValue.class);
   }

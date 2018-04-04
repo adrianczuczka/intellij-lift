@@ -51,6 +51,10 @@ public class LiftVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitSymbol(@NotNull LiftSymbol o) {
+    visitPsiElement(o);
+  }
+
   public void visitTupleType(@NotNull LiftTupleType o) {
     visitPsiElement(o);
   }
