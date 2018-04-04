@@ -21,7 +21,9 @@ class LiftCompletionContributor extends CompletionContributor{
     override def addCompletions(v: CompletionParameters, processingContext: ProcessingContext,
                                 completionResultSet: CompletionResultSet): Unit = {
       if (!v.getOriginalPosition.getParent.toString.equals("Lift file") ||
-        v.getOriginalPosition.getPrevSibling.getPrevSibling.toString.equals("PsiElement(LiftTokenType.COMPOSER)")) {
+        (v.getOriginalPosition.getPrevSibling != null &&
+          v.getOriginalPosition.getPrevSibling.getPrevSibling != null &&
+          v.getOriginalPosition.getPrevSibling.getPrevSibling.getNode.getElementType == LiftTypes.COMPOSER)) {
         completionResultSet.addAllElements(
           CoreLift.map(cl => LookupElementBuilder.create(cl)).asJavaCollection)
 
@@ -41,7 +43,7 @@ class LiftCompletionContributor extends CompletionContributor{
 
   def getImportStatements(a: Array[PsiElement]): Array[String] = {
     val result = a flatMap {
-      case e: LiftImportImpl => Some(e.getNode.getPsi.findElementAt(7).getText)
+      case e: LiftImportImpl => Some(e.findElementAt(7).getText)
       case _ => None
     }
     result
