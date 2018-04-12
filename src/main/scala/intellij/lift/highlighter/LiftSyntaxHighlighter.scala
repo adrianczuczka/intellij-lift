@@ -33,7 +33,6 @@ object LiftSyntaxHighlighter{
 }
 
 class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
-  // TODO: Implement unimplemented methods from the interface
   import com.intellij.openapi.fileTypes.SyntaxHighlighterBase._
 
 

@@ -1,0 +1,16 @@
+// This is a generated file. Not intended for manual editing.
+package intellij.lift.psi;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
+
+public interface LiftParam extends PsiElement {
+
+  @NotNull
+  LiftIdent getIdent();
+
+  @NotNull
+  LiftTyp getTyp();
+
+}

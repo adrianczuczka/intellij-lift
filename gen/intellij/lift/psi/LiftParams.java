@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface LiftParams extends PsiElement {
 
   @NotNull
-  List<LiftIdent> getIdentList();
-
-  @NotNull
-  List<LiftTyp> getTypList();
+  List<LiftParam> getParamList();
 
 }

@@ -50,6 +50,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == IMPORT) {
       r = import_$(b, 0);
     }
+    else if (t == PARAM) {
+      r = param(b, 0);
+    }
     else if (t == PARAMS) {
       r = params(b, 0);
     }
@@ -456,7 +459,21 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [ ident COLON typ (COMMA ident COLON typ)* ]
+  // ident COLON typ
+  public static boolean param(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = ident(b, l + 1);
+    r = r && consumeToken(b, COLON);
+    r = r && typ(b, l + 1);
+    exit_section_(b, m, PARAM, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // [ param (COMMA param)* ]
   public static boolean params(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "params")) return false;
     Marker m = enter_section_(b, l, _NONE_, PARAMS, "<params>");
@@ -465,40 +482,36 @@ public class LiftParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ident COLON typ (COMMA ident COLON typ)*
+  // param (COMMA param)*
   private static boolean params_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "params_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = ident(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && typ(b, l + 1);
-    r = r && params_0_3(b, l + 1);
+    r = param(b, l + 1);
+    r = r && params_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // (COMMA ident COLON typ)*
-  private static boolean params_0_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "params_0_3")) return false;
+  // (COMMA param)*
+  private static boolean params_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "params_0_1")) return false;
     int c = current_position_(b);
     while (true) {
-      if (!params_0_3_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "params_0_3", c)) break;
+      if (!params_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "params_0_1", c)) break;
       c = current_position_(b);
     }
     return true;
   }
 
-  // COMMA ident COLON typ
-  private static boolean params_0_3_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "params_0_3_0")) return false;
+  // COMMA param
+  private static boolean params_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "params_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && ident(b, l + 1);
-    r = r && consumeToken(b, COLON);
-    r = r && typ(b, l + 1);
+    r = r && param(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

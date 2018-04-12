@@ -5,13 +5,32 @@
   <vendor email="lift-project@inf.ed.ac.uk" url="http://www.lift-project.org">Lift</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      <p>Plugin for <a href="http://www.lift-project.org">Lift Language</a>.</p>
+      <p>This plugin was initially done as a part of an honours project at the University of Edinburgh, 2018, supervised by Dr. Christophe Dubach.</p>
+      <br>
+      <p>Lift is a novel approach to achieving performance portability on parallel accelerators.
+      Lift combines a high-level functional data parallel language with a system of rewrite rules which encode algorithmic and hardware-specific optimisation choices.
+      Applications written in Lift are able to take advantage of GPUs (and in the future other accelerators), transparently from the user.</p>
+      <br>
+      <p>This plugin provides support for the following features:</p>
+      <ul>
+        <li>Syntax highlighting for elementary features in Lift</li>
+        <li>Simple code completion aimed at support of OpenCL library functions</li>
+        <li>Basic error highlighting aimed at incorrect imports or function calls</li>
+        <li>Colour Settings page enabling developers to customise editor look for Lift programs</li>
+        <li>Brace matcher support</li>
+      </ul>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      <p>version 1.0</p>
+      <ul>
+        <li>Syntax highlighting for elementary features in Lift</li>
+        <li>Simple code completion aimed at support of OpenCL library functions</li>
+        <li>Basic error highlighting aimed at incorrect imports or function calls</li>
+        <li>Colour Settings page enabling developers to customise editor look for Lift programs</li>
+        <li>Brace matcher support</li>
+      </ul>
     ]]>
   </change-notes>
 
@@ -43,7 +62,7 @@
     <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>
 
     <!-- Completion Contributor -->
-    <completion.contributor language="Lift" implementationClass="intellij.lift.completion.LiftCompletionContributor"/>
+    <completion.contributor language="Lift" implementationClass="intellij.lift.code_completion.LiftCompletionContributor"/>
 
     <!-- Commenter -->
     <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>

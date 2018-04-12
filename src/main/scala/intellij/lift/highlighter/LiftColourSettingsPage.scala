@@ -17,7 +17,7 @@ object LiftColourSettingsPage{
     new AttributesDescriptor("Parentheses", Parens),
     new AttributesDescriptor("Brace", Braces),
     new AttributesDescriptor("Bracket", Brackets),
-    new AttributesDescriptor("Variable", Identifier),
+    new AttributesDescriptor("Identifier", Identifier),
     new AttributesDescriptor("Operator", Operator),
   )
   private final val AttributesKeyMap = Map[String, TextAttributesKey]()

@@ -28,14 +28,8 @@ public class LiftParamsImpl extends ASTWrapperPsiElement implements LiftParams {
 
   @Override
   @NotNull
-  public List<LiftIdent> getIdentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiftIdent.class);
-  }
-
-  @Override
-  @NotNull
-  public List<LiftTyp> getTypList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiftTyp.class);
+  public List<LiftParam> getParamList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, LiftParam.class);
   }
 
 }

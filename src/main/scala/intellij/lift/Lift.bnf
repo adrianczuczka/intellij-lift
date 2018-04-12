@@ -31,7 +31,9 @@ typ                 ::= TYPE | array_type | tuple_type
 
 fundef              ::= DEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
 
-params              ::= [ ident COLON typ (COMMA ident COLON typ)* ]
+params              ::= [ param (COMMA param)* ]
+
+param               ::= ident COLON typ
 
 block               ::= LEFT_BRACE GAP (stmt)* (APPLICATOR arguments)? GAP RIGHT_BRACE
 

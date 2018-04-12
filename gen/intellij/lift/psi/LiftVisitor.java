@@ -43,6 +43,10 @@ public class LiftVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitParam(@NotNull LiftParam o) {
+    visitPsiElement(o);
+  }
+
   public void visitParams(@NotNull LiftParams o) {
     visitPsiElement(o);
   }

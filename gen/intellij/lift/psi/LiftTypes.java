@@ -17,6 +17,7 @@ public interface LiftTypes {
   IElementType FUNDEF = new LiftElementType("FUNDEF");
   IElementType IDENT = new LiftElementType("IDENT");
   IElementType IMPORT = new LiftElementType("IMPORT");
+  IElementType PARAM = new LiftElementType("PARAM");
   IElementType PARAMS = new LiftElementType("PARAMS");
   IElementType STMT = new LiftElementType("STMT");
   IElementType SYMBOL = new LiftElementType("SYMBOL");
@@ -77,6 +78,9 @@ public interface LiftTypes {
       }
       else if (type == IMPORT) {
         return new LiftImportImpl(node);
+      }
+      else if (type == PARAM) {
+        return new LiftParamImpl(node);
       }
       else if (type == PARAMS) {
         return new LiftParamsImpl(node);
