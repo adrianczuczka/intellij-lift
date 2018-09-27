@@ -13,7 +13,7 @@ import intellij.lift.psi.*;
 
 public class LiftTupleTypeImpl extends ASTWrapperPsiElement implements LiftTupleType {
 
-  public LiftTupleTypeImpl(ASTNode node) {
+  public LiftTupleTypeImpl(@NotNull ASTNode node) {
     super(node);
   }
 

@@ -13,7 +13,7 @@ import intellij.lift.psi.*;
 
 public class LiftArrayTypeImpl extends ASTWrapperPsiElement implements LiftArrayType {
 
-  public LiftArrayTypeImpl(ASTNode node) {
+  public LiftArrayTypeImpl(@NotNull ASTNode node) {
     super(node);
   }
 

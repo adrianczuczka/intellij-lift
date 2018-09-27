@@ -13,7 +13,7 @@ import intellij.lift.psi.*;
 
 public class LiftParamsImpl extends ASTWrapperPsiElement implements LiftParams {
 
-  public LiftParamsImpl(ASTNode node) {
+  public LiftParamsImpl(@NotNull ASTNode node) {
     super(node);
   }
 

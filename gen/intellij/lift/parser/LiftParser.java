@@ -128,10 +128,8 @@ public class LiftParser implements PsiParser, LightPsiParser {
   private static boolean array_type_0_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_0_4")) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = ident(b, l + 1);
     if (!r) r = consumeToken(b, NUMERIC_VALUE);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -152,11 +150,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = array_type_1_0_0(b, l + 1);
-    int c = current_position_(b);
     while (r) {
+      int c = current_position_(b);
       if (!array_type_1_0_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "array_type_1_0", c)) break;
-      c = current_position_(b);
     }
     exit_section_(b, m, null, r);
     return r;
@@ -185,10 +182,8 @@ public class LiftParser implements PsiParser, LightPsiParser {
   private static boolean array_type_1_0_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type_1_0_0_1_0")) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = consumeToken(b, IDENTIFIER);
     if (!r) r = consumeToken(b, NUMERIC_VALUE);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -210,11 +205,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (stmt)*
   private static boolean block_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "block_2")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!block_2_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "block_2", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -265,11 +259,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (COMPOSER funcall)*
   private static boolean composed_funcall_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "composed_funcall_3")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!composed_funcall_3_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "composed_funcall_3", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -362,11 +355,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (COMMA exp)*
   private static boolean funcall_3_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "funcall_3_0_1")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!funcall_3_0_1_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "funcall_3_0_1", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -496,11 +488,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (COMMA param)*
   private static boolean params_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "params_0_1")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!params_0_1_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "params_0_1", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -532,11 +523,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (import)*
   private static boolean program_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program_0")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!program_0_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "program_0", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -554,11 +544,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // (fundef)*
   private static boolean program_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program_1")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!program_1_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "program_1", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -576,11 +565,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
   // COMMENT*
   private static boolean program_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program_2")) return false;
-    int c = current_position_(b);
     while (true) {
+      int c = current_position_(b);
       if (!consumeToken(b, COMMENT)) break;
       if (!empty_element_parsed_guard_(b, "program_2", c)) break;
-      c = current_position_(b);
     }
     return true;
   }
@@ -630,11 +618,10 @@ public class LiftParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = exp(b, l + 1);
-    int c = current_position_(b);
     while (r) {
+      int c = current_position_(b);
       if (!exp(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "tuple_type_4", c)) break;
-      c = current_position_(b);
     }
     exit_section_(b, m, null, r);
     return r;

@@ -13,7 +13,7 @@ import intellij.lift.psi.*;
 
 public class LiftSymbolImpl extends ASTWrapperPsiElement implements LiftSymbol {
 
-  public LiftSymbolImpl(ASTNode node) {
+  public LiftSymbolImpl(@NotNull ASTNode node) {
     super(node);
   }
 

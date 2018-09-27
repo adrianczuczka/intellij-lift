@@ -13,7 +13,7 @@ import intellij.lift.psi.*;
 
 public class LiftIdentImpl extends ASTWrapperPsiElement implements LiftIdent {
 
-  public LiftIdentImpl(ASTNode node) {
+  public LiftIdentImpl(@NotNull ASTNode node) {
     super(node);
   }
 
