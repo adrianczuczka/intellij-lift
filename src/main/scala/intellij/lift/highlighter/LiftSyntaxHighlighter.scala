@@ -12,7 +12,7 @@ import intellij.lift.LiftParserDefinition._
 import intellij.lift.psi.LiftTypes
 import org.jetbrains.annotations.NotNull
 
-object LiftSyntaxHighlighter{
+object LiftSyntaxHighlighter {
   final val Importable = createTextAttributesKey("LIFT_IMPORTABLE", DefaultLanguageHighlighterColors.STRING)
   final val Comment = createTextAttributesKey("LIFT_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
   final val BadCharacter = createTextAttributesKey("LIFT_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
@@ -29,10 +29,10 @@ object LiftSyntaxHighlighter{
   final val Parens = createTextAttributesKey("LIFT_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES)
   final val Braces = createTextAttributesKey("LIFT_BRACES", DefaultLanguageHighlighterColors.BRACES)
   final val Brackets = createTextAttributesKey("LIFT_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
-
 }
 
-class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
+class LiftSyntaxHighlighter extends SyntaxHighlighterBase {
+
   import com.intellij.openapi.fileTypes.SyntaxHighlighterBase._
 
 
@@ -46,7 +46,8 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase{
     import intellij.lift.highlighter.LiftSyntaxHighlighter._
     iElementType match {
       case TokenType.BAD_CHARACTER => pack(BadCharacter)
-      case et if et == LiftTypes.COMMENT => pack(Comment)
+      case LiftTypes.COMMENT | LiftTypes.LINE_COMMENT | LiftTypes.BLOCK_COMMENT | LiftTypes.NOT_TERMINATED_COMMENT
+      => pack(Comment)
       case LiftTypes.IMPORTABLE => pack(Importable)
       case LiftTypes.LEFT_PAREN | LiftTypes.RIGHT_PAREN => pack(Parens)
       case LiftTypes.LEFT_BRACE | LiftTypes.RIGHT_BRACE => pack(Braces)

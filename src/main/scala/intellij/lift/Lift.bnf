@@ -13,7 +13,7 @@
   tokenTypeClass="intellij.lift.psi.LiftTokenType"
 }
 
-program             ::= (import)* (fundef)* COMMENT*
+program             ::= (import)* (fundef)*
 
 import              ::= IMPORT_KEYWORD IMPORTABLE GAP
 
@@ -55,3 +55,5 @@ arguments           ::= funcall
                       | value
 
 composed_funcall    ::= funcall COMPOSER funcall (COMPOSER funcall)*
+
+comment             ::= LINE_COMMENT | BLOCK_COMMENT | NOT_TERMINATED_COMMENT

@@ -32,6 +32,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == BLOCK) {
       r = block(b, 0);
     }
+    else if (t == COMMENT) {
+      r = comment(b, 0);
+    }
     else if (t == COMPOSED_FUNCALL) {
       r = composed_funcall(b, 0);
     }
@@ -238,6 +241,19 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, APPLICATOR);
     r = r && arguments(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // LINE_COMMENT | BLOCK_COMMENT | NOT_TERMINATED_COMMENT
+  public static boolean comment(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "comment")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, COMMENT, "<comment>");
+    r = consumeToken(b, LINE_COMMENT);
+    if (!r) r = consumeToken(b, BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, NOT_TERMINATED_COMMENT);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -508,14 +524,13 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (import)* (fundef)* COMMENT*
+  // (import)* (fundef)*
   static boolean program(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "program")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = program_0(b, l + 1);
     r = r && program_1(b, l + 1);
-    r = r && program_2(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -560,17 +575,6 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = fundef(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
-  }
-
-  // COMMENT*
-  private static boolean program_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "program_2")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!consumeToken(b, COMMENT)) break;
-      if (!empty_element_parsed_guard_(b, "program_2", c)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */

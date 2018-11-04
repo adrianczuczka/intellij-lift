@@ -1,15 +1,6 @@
-<!--
-
-Visit
-
-https://github.com/rikvdkleij/intellij-haskell#how-to-build-project
-
-for information about the project set-up.
--->
-
 <idea-plugin>
   <id>com.lift.intellij-lift</id>
-  <name>Lift Plugin</name>
+  <name>Lift Plugin Test</name>
   <version>1.0</version>
   <vendor email="lift-project@inf.ed.ac.uk" url="http://www.lift-project.org">Lift</vendor>
 

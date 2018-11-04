@@ -11,6 +11,7 @@ public interface LiftTypes {
   IElementType ARGUMENTS = new LiftElementType("ARGUMENTS");
   IElementType ARRAY_TYPE = new LiftElementType("ARRAY_TYPE");
   IElementType BLOCK = new LiftElementType("BLOCK");
+  IElementType COMMENT = new LiftElementType("COMMENT");
   IElementType COMPOSED_FUNCALL = new LiftElementType("COMPOSED_FUNCALL");
   IElementType EXP = new LiftElementType("EXP");
   IElementType FUNCALL = new LiftElementType("FUNCALL");
@@ -27,10 +28,10 @@ public interface LiftTypes {
 
   IElementType APPLICATOR = new LiftTokenType("APPLICATOR");
   IElementType ARRAY = new LiftTokenType("ARRAY");
+  IElementType BLOCK_COMMENT = new LiftTokenType("BLOCK_COMMENT");
   IElementType BOOLEAN = new LiftTokenType("BOOLEAN");
   IElementType COLON = new LiftTokenType("COLON");
   IElementType COMMA = new LiftTokenType("COMMA");
-  IElementType COMMENT = new LiftTokenType("COMMENT");
   IElementType COMPOSER = new LiftTokenType("COMPOSER");
   IElementType DEFINITION = new LiftTokenType("DEFINITION");
   IElementType EQUAL = new LiftTokenType("EQUAL");
@@ -41,6 +42,8 @@ public interface LiftTypes {
   IElementType LEFT_BRACE = new LiftTokenType("LEFT_BRACE");
   IElementType LEFT_BRACKET = new LiftTokenType("LEFT_BRACKET");
   IElementType LEFT_PAREN = new LiftTokenType("LEFT_PAREN");
+  IElementType LINE_COMMENT = new LiftTokenType("LINE_COMMENT");
+  IElementType NOT_TERMINATED_COMMENT = new LiftTokenType("NOT_TERMINATED_COMMENT");
   IElementType NUMERIC_VALUE = new LiftTokenType("NUMERIC_VALUE");
   IElementType OPERATION = new LiftTokenType("OPERATION");
   IElementType RIGHT_BRACE = new LiftTokenType("RIGHT_BRACE");
@@ -60,6 +63,9 @@ public interface LiftTypes {
       }
       else if (type == BLOCK) {
         return new LiftBlockImpl(node);
+      }
+      else if (type == COMMENT) {
+        return new LiftCommentImpl(node);
       }
       else if (type == COMPOSED_FUNCALL) {
         return new LiftComposedFuncallImpl(node);

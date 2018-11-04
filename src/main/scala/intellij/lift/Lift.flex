@@ -3,7 +3,7 @@ package intellij.lift;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import intellij.lift.psi.LiftTypes;
-import com.intellij.psi.TokenType;
+import com.intellij.psi.TokenType;import static intellij.lift.psi.LiftTypes.BLOCK_COMMENT;import static intellij.lift.psi.LiftTypes.NOT_TERMINATED_COMMENT;
 
 %%
 
@@ -14,6 +14,11 @@ import com.intellij.psi.TokenType;
 %type IElementType
 %eof{  return;
 %eof}
+%xstate L_BLOCK_COMMENT
+
+%{
+    private int commentStart;
+%}
 
 newline             = \r|\n|\r\n
 unispace            = \x05
@@ -35,9 +40,10 @@ comma               = ","
 composer            = "."
 applicator          = "$"
 slash               = "/"
+star                = "*"
 
 add                 = "+"
-subtract           = "-"
+subtract            = "-"
 multiply            = "*"
 divide              = "/"
 operation           = {add} | {subtract} | {multiply} | {divide}
@@ -66,11 +72,37 @@ type                = {int_type} | {bool_type} | {float_type} | {double_type}
 
 identifier          = {small} ({small} | {large} | {digit})*
 
-comment             = {slash}{slash}[^\r\n]*
+line_comment        = {slash}{slash}[^\r\n]*
+block_comment_start = {slash}{star}
+block_comment_end   = {star}{slash}
 
 %%
 
-{comment}                           { return LiftTypes.COMMENT; }
+<L_BLOCK_COMMENT> {
+
+    <<EOF>> {
+            int state = yystate();
+            yybegin(YYINITIAL);
+            zzStartRead = commentStart;
+            return NOT_TERMINATED_COMMENT;
+      }
+
+    {block_comment_end} {
+            int state = yystate();
+            yybegin(YYINITIAL);
+            zzStartRead = commentStart;
+            return BLOCK_COMMENT;
+      }
+
+    .|{white_char}|{newline} {}
+}
+
+{block_comment_start} {
+    yybegin(L_BLOCK_COMMENT);
+    commentStart = getTokenStart();
+}
+
+{line_comment}                      { return LiftTypes.LINE_COMMENT; }
 
 {white_space}                       { return TokenType.WHITE_SPACE; }
 

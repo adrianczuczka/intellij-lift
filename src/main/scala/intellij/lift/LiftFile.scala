@@ -25,6 +25,8 @@ class LiftFile(viewProvider: FileViewProvider) extends PsiFileBase(viewProvider,
 
 object LiftFileType {
   final val Instance: LiftFileType = new LiftFileType
+
+  final val LiftFileExtension = "lift"
 }
 
 class LiftFileType extends LanguageFileType(LiftLanguage.Instance){

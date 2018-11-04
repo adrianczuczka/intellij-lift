@@ -19,6 +19,10 @@ public class LiftVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitComment(@NotNull LiftComment o) {
+    visitPsiElement(o);
+  }
+
   public void visitComposedFuncall(@NotNull LiftComposedFuncall o) {
     visitPsiElement(o);
   }
