@@ -1,10 +1,10 @@
 <idea-plugin>
-  <id>com.lift.intellij-lift</id>
-  <name>Lift Plugin Test</name>
-  <version>1.0</version>
-  <vendor email="lift-project@inf.ed.ac.uk" url="http://www.lift-project.org">Lift</vendor>
+    <id>com.lift.intellij-lift</id>
+    <name>Lift Plugin Test</name>
+    <version>1.0</version>
+    <vendor email="lift-project@inf.ed.ac.uk" url="http://www.lift-project.org">Lift</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
       <p>Plugin for <a href="http://www.lift-project.org">Lift Language</a>.</p>
       <p>This plugin was initially done as a part of an honours project at the University of Edinburgh, 2018, supervised by Dr. Christophe Dubach.</p>
       <br>
@@ -22,7 +22,7 @@
       </ul>
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
       <p>version 1.0</p>
       <ul>
         <li>Syntax highlighting for elementary features in Lift</li>
@@ -32,43 +32,48 @@
         <li>Brace matcher support</li>
       </ul>
     ]]>
-  </change-notes>
+    </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="145.0"/>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
 
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- File Type Factory -->
-    <fileTypeFactory implementation="intellij.lift.LiftFileTypeFactory"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- File Type Factory -->
+        <fileTypeFactory implementation="intellij.lift.LiftFileTypeFactory"/>
 
-    <!-- Parser -->
-    <lang.parserDefinition language="Lift" implementationClass="intellij.lift.LiftParserDefinition"/>
+        <!-- Parser -->
+        <lang.parserDefinition language="Lift" implementationClass="intellij.lift.LiftParserDefinition"/>
 
-    <!-- Syntax Highlighter -->
-    <lang.syntaxHighlighterFactory language="Lift" implementationClass="intellij.lift.highlighter.LiftSyntaxHighlighterFactory"/>
+        <!-- Syntax Highlighter -->
+        <lang.syntaxHighlighterFactory language="Lift"
+                                       implementationClass="intellij.lift.highlighter.LiftSyntaxHighlighterFactory"/>
 
-    <!-- Annotator -->
-    <annotator language="Lift" implementationClass="intellij.lift.annotator.LiftAnnotator"/>
+        <!-- External Annotator -->
+        <externalAnnotator language="Lift" implementationClass="intellij.lift.annotator.LiftExternalAnnotator"/>
 
-    <!-- Colour Settings -->
-    <colorSettingsPage implementation="intellij.lift.highlighter.LiftColourSettingsPage"/>
+        <!-- Annotator -->
+        <annotator language="Lift" implementationClass="intellij.lift.annotator.LiftAnnotator"/>
 
-    <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>
+        <!-- Colour Settings -->
+        <colorSettingsPage implementation="intellij.lift.highlighter.LiftColourSettingsPage"/>
 
-    <!-- Completion Contributor -->
-    <completion.contributor language="Lift" implementationClass="intellij.lift.code_completion.LiftCompletionContributor"/>
+        <lang.braceMatcher language="Lift" implementationClass="intellij.lift.highlighter.LiftBraceMatcher"/>
 
-    <!-- Commenter -->
-    <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>
-  </extensions>
+        <!-- Completion Contributor -->
+        <completion.contributor language="Lift"
+                                implementationClass="intellij.lift.code_completion.LiftCompletionContributor"/>
 
-  <actions>
-    <!-- Add your actions here -->
-  </actions>
+        <!-- Commenter -->
+        <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
 </idea-plugin>

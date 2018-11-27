@@ -2,22 +2,20 @@ package intellij.lift.annotator
 
 import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.lang.annotation.{AnnotationHolder, Annotator}
-import com.intellij.psi.PsiElement
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import intellij.lift.psi.impl.LiftImportImpl
 import intellij.lift.psi.LiftTypes
-import lang.parser.LiftParserInit
+import com.intellij.psi.PsiDocumentManager
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 
 class LiftAnnotator extends Annotator {
   private final val OpenCLLift = Stream("mapGlb", "mapLcl", "mapWrg", "mapSeq", "partRed", "reduceSeq",
     "toGlobal", "toLocal", "toPrivate", "asVector", "asScalar", "vectorize")
 
+
   override def annotate(psiElement: PsiElement, annotationHolder: AnnotationHolder): Unit = {
     // FunDecl name
-    val dir = psiElement.getContainingFile.getContainingDirectory.toString.replaceAll("PsiDirectory:", "")
-    val fileName = psiElement.getContainingFile.getName
-    val result = LiftParserInit(dir + "/" + fileName)
-    println(result)
     if (psiElement.getPrevSibling != null
       && psiElement.getPrevSibling.getPrevSibling != null
       && psiElement.getPrevSibling.getPrevSibling.getNode != null
@@ -25,7 +23,6 @@ class LiftAnnotator extends Annotator {
       val annotation = annotationHolder.createInfoAnnotation(psiElement, null)
       annotation.setTextAttributes(DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
     }
-
     // IMPORT
     if (psiElement.getNode.getElementType == LiftTypes.IMPORTABLE) {
       if (!psiElement.getText.equals("lift.opencl")) {
@@ -54,6 +51,14 @@ class LiftAnnotator extends Annotator {
         annotation.setTextAttributes(DefaultLanguageHighlighterColors.FUNCTION_CALL)
       }
     }
+  }
+
+  def getElementAtLine(file: PsiFile, line: Int, column: Int): PsiElement = {
+    val document = PsiDocumentManager.getInstance(file.getProject).getDocument(file)
+    val offset = document.getLineStartOffset(line)
+    var element = file.getViewProvider.findElementAt(offset + column)
+    if (document.getLineNumber(element.getTextOffset) != line) element = element.getNextSibling
+    element
   }
 
   def getImportStatements(a: Array[PsiElement]): Array[String] = {
