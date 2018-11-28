@@ -71,6 +71,12 @@
 
         <!-- Commenter -->
         <lang.commenter language="Lift" implementationClass="intellij.lift.editor.LiftCommenter"/>
+
+        <!-- Code Style Settings Provider -->
+        <codeStyleSettingsProvider implementation="intellij.lift.code_style.LiftCodeStyleSettingsProvider"/>
+
+        <!-- Language Code Style Settings Provider -->
+        <langCodeStyleSettingsProvider implementation="intellij.lift.code_style.LiftLanguageCodeStyleSettingsProvider"/>
     </extensions>
 
     <actions>

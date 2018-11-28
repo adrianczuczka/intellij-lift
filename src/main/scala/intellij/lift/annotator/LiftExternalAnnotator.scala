@@ -52,10 +52,3 @@ class LiftExternalAnnotator extends ExternalAnnotator[PsiFile, Either[LiftNode, 
     }
   }
 }
-
-
-/*
-(\p6 ->
-  int_add(2, 2)
-)
-*/
