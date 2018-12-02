@@ -22,4 +22,7 @@ public interface LiftExp extends PsiElement {
   @Nullable
   LiftValue getValue();
 
+  @Nullable
+  LiftVardef getVardef();
+
 }

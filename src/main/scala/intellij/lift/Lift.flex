@@ -1,9 +1,12 @@
 package intellij.lift;
 
+import b.b.L;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import intellij.lift.psi.LiftTypes;
-import com.intellij.psi.TokenType;import static intellij.lift.psi.LiftTypes.BLOCK_COMMENT;import static intellij.lift.psi.LiftTypes.NOT_TERMINATED_COMMENT;
+import com.intellij.psi.TokenType;
+import static intellij.lift.psi.LiftTypes.BLOCK_COMMENT;
+import static intellij.lift.psi.LiftTypes.NOT_TERMINATED_COMMENT;
 
 %%
 
@@ -36,6 +39,7 @@ left_bracket        = "["
 right_bracket       = "]"
 equal               = "="
 colon               = ":"
+semi_colon          = ";"
 comma               = ","
 composer            = "."
 applicator          = "$"
@@ -124,6 +128,7 @@ block_comment_end   = {star}{slash}
 {right_bracket}                     { return LiftTypes.RIGHT_BRACKET; }
 {comma}                             { return LiftTypes.COMMA; }
 {colon}                             { return LiftTypes.COLON; }
+{semi_colon}                        { return LiftTypes.SEMI_COLON;}
 {equal}                             { return LiftTypes.EQUAL; }
 {composer}                          { return LiftTypes.COMPOSER; }
 {applicator}                        { return LiftTypes.APPLICATOR; }

@@ -25,6 +25,7 @@ public interface LiftTypes {
   IElementType TUPLE_TYPE = new LiftElementType("TUPLE_TYPE");
   IElementType TYP = new LiftElementType("TYP");
   IElementType VALUE = new LiftElementType("VALUE");
+  IElementType VARDEF = new LiftElementType("VARDEF");
 
   IElementType APPLICATOR = new LiftTokenType("APPLICATOR");
   IElementType ARRAY = new LiftTokenType("ARRAY");
@@ -49,6 +50,7 @@ public interface LiftTypes {
   IElementType RIGHT_BRACE = new LiftTokenType("RIGHT_BRACE");
   IElementType RIGHT_BRACKET = new LiftTokenType("RIGHT_BRACKET");
   IElementType RIGHT_PAREN = new LiftTokenType("RIGHT_PAREN");
+  IElementType SEMI_COLON = new LiftTokenType("SEMI_COLON");
   IElementType TUPLE = new LiftTokenType("TUPLE");
   IElementType TYPE = new LiftTokenType("TYPE");
 
@@ -105,6 +107,9 @@ public interface LiftTypes {
       }
       else if (type == VALUE) {
         return new LiftValueImpl(node);
+      }
+      else if (type == VARDEF) {
+        return new LiftVardefImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

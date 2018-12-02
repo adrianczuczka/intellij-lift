@@ -75,6 +75,10 @@ public class LiftVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitVardef(@NotNull LiftVardef o) {
+    visitPsiElement(o);
+  }
+
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }

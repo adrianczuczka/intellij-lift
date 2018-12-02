@@ -6,8 +6,6 @@ import com.intellij.psi.{PsiDocumentManager, PsiElement, PsiFile}
 import ir.TypeMismatchExceptionWithPosition
 import lang.parser.{LiftNode, LiftParserInit}
 
-import scala.io.Source
-
 case class ExceptionDetails(element: Option[PsiElement], msg: String)
 
 class LiftExternalAnnotator extends ExternalAnnotator[PsiFile, Either[LiftNode, ExceptionDetails]] {
@@ -43,7 +41,7 @@ class LiftExternalAnnotator extends ExternalAnnotator[PsiFile, Either[LiftNode, 
   override def apply(file: PsiFile, annotationResult: Either[LiftNode, ExceptionDetails], holder: AnnotationHolder): Unit = {
     //println("apply")
     annotationResult match {
-      case Left(node) => println(node)
+      case Left(node) => //println(node)
       case Right(e) =>
         e.element match {
           case Some(x) => holder.createErrorAnnotation(x, e.msg)

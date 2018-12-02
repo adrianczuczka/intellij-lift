@@ -74,6 +74,9 @@ public class LiftParser implements PsiParser, LightPsiParser {
     else if (t == VALUE) {
       r = value(b, 0);
     }
+    else if (t == VARDEF) {
+      r = vardef(b, 0);
+    }
     else {
       r = parse_root_(t, b, 0);
     }
@@ -191,18 +194,31 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LEFT_BRACE GAP (stmt)* (APPLICATOR arguments)? GAP RIGHT_BRACE
+  // LEFT_BRACE GAP* (stmt)* (APPLICATOR arguments)? GAP* RIGHT_BRACE
   public static boolean block(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "block")) return false;
     if (!nextTokenIs(b, LEFT_BRACE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, LEFT_BRACE, GAP);
+    r = consumeToken(b, LEFT_BRACE);
+    r = r && block_1(b, l + 1);
     r = r && block_2(b, l + 1);
     r = r && block_3(b, l + 1);
-    r = r && consumeTokens(b, 0, GAP, RIGHT_BRACE);
+    r = r && block_4(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACE);
     exit_section_(b, m, BLOCK, r);
     return r;
+  }
+
+  // GAP*
+  private static boolean block_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "block_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, GAP)) break;
+      if (!empty_element_parsed_guard_(b, "block_1", c)) break;
+    }
+    return true;
   }
 
   // (stmt)*
@@ -242,6 +258,17 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = r && arguments(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
+  }
+
+  // GAP*
+  private static boolean block_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "block_4")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, GAP)) break;
+      if (!empty_element_parsed_guard_(b, "block_4", c)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */
@@ -300,6 +327,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
   //                       | funcall
   //                       | value
   //                       | symbol
+  //                       | vardef
   //                       | IDENTIFIER
   public static boolean exp(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exp")) return false;
@@ -310,6 +338,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     if (!r) r = funcall(b, l + 1);
     if (!r) r = value(b, l + 1);
     if (!r) r = symbol(b, l + 1);
+    if (!r) r = vardef(b, l + 1);
     if (!r) r = consumeToken(b, IDENTIFIER);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -328,7 +357,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
+  // IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN SEMI_COLON
   public static boolean funcall(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "funcall")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
@@ -338,7 +367,7 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = r && funcall_2(b, l + 1);
     r = r && funcall_3(b, l + 1);
     r = r && funcall_4(b, l + 1);
-    r = r && consumeToken(b, RIGHT_PAREN);
+    r = r && consumeTokens(b, 0, RIGHT_PAREN, SEMI_COLON);
     exit_section_(b, m, FUNCALL, r);
     return r;
   }
@@ -578,14 +607,27 @@ public class LiftParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // exp
+  // exp SEMI_COLON GAP*
   public static boolean stmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "stmt")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STMT, "<stmt>");
     r = exp(b, l + 1);
+    r = r && consumeToken(b, SEMI_COLON);
+    r = r && stmt_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
+  }
+
+  // GAP*
+  private static boolean stmt_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stmt_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, GAP)) break;
+      if (!empty_element_parsed_guard_(b, "stmt_2", c)) break;
+    }
+    return true;
   }
 
   /* ********************************************************** */
@@ -654,6 +696,20 @@ public class LiftParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, NUMERIC_VALUE);
     if (!r) r = consumeToken(b, BOOLEAN);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER EQUAL exp SEMI_COLON
+  public static boolean vardef(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "vardef")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, IDENTIFIER, EQUAL);
+    r = r && exp(b, l + 1);
+    r = r && consumeToken(b, SEMI_COLON);
+    exit_section_(b, m, VARDEF, r);
     return r;
   }
 
