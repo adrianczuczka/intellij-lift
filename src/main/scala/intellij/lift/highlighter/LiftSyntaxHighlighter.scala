@@ -23,6 +23,7 @@ object LiftSyntaxHighlighter {
   final val Keyword = createTextAttributesKey("LIFT_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
   final val Operator = createTextAttributesKey("LIFT_OPERATION", DefaultLanguageHighlighterColors.OPERATION_SIGN)
   final val FunctionDeclaration = createTextAttributesKey("LIFT_FUN_NAME", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
+  final val VariableDeclaration = createTextAttributesKey("LIFT_VAR_NAME", DefaultLanguageHighlighterColors.GLOBAL_VARIABLE)
   final val Types = createTextAttributesKey("LIFT_TYPES", DefaultLanguageHighlighterColors.FUNCTION_CALL)
 
   // punctuation
@@ -49,6 +50,7 @@ class LiftSyntaxHighlighter extends SyntaxHighlighterBase {
       case LiftTypes.COMMENT | LiftTypes.LINE_COMMENT | LiftTypes.BLOCK_COMMENT | LiftTypes.NOT_TERMINATED_COMMENT
       => pack(Comment)
       case LiftTypes.IMPORTABLE => pack(Importable)
+      case LiftTypes.VARDEF => pack(VariableDeclaration)
       case LiftTypes.LEFT_PAREN | LiftTypes.RIGHT_PAREN => pack(Parens)
       case LiftTypes.LEFT_BRACE | LiftTypes.RIGHT_BRACE => pack(Braces)
       case LiftTypes.LEFT_BRACKET | LiftTypes.RIGHT_BRACKET => pack(Brackets)

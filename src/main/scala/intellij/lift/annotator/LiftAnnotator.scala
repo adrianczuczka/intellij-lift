@@ -19,7 +19,7 @@ class LiftAnnotator extends Annotator {
     if (psiElement.getPrevSibling != null
       && psiElement.getPrevSibling.getPrevSibling != null
       && psiElement.getPrevSibling.getPrevSibling.getNode != null
-      && psiElement.getPrevSibling.getPrevSibling.getNode.getElementType == LiftTypes.DEFINITION) {
+      && psiElement.getPrevSibling.getPrevSibling.getNode.getElementType == LiftTypes.FUNDEFINITION) {
       val annotation = annotationHolder.createInfoAnnotation(psiElement, null)
       annotation.setTextAttributes(DefaultLanguageHighlighterColors.FUNCTION_DECLARATION)
     }

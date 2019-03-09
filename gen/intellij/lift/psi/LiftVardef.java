@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface LiftVardef extends PsiElement {
 
   @NotNull
-  LiftExp getExp();
+  LiftArguments getArguments();
+
+  @NotNull
+  LiftIdent getIdent();
 
 }

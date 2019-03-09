@@ -29,7 +29,7 @@ tuple_type          ::= TUPLE LEFT_PAREN exp COMMA exp+ RIGHT_PAREN
 
 typ                 ::= TYPE | array_type | tuple_type
 
-fundef              ::= DEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
+fundef              ::= FUNDEFINITION ident LEFT_PAREN params RIGHT_PAREN (COLON typ)? EQUAL block (GAP)?
 
 params              ::= [ param (COMMA param)* ]
 
@@ -37,7 +37,7 @@ param               ::= ident COLON typ
 
 block               ::= LEFT_BRACE GAP* (stmt)* (APPLICATOR arguments)? GAP* RIGHT_BRACE
 
-stmt                ::= exp SEMI_COLON GAP*
+stmt                ::= exp SEMI_COLON? GAP*
 
 exp                 ::= LEFT_PAREN exp RIGHT_PAREN
                       | composed_funcall
@@ -49,9 +49,9 @@ exp                 ::= LEFT_PAREN exp RIGHT_PAREN
 
 symbol              ::= OPERATION
 
-funcall             ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN SEMI_COLON
+funcall             ::= IDENTIFIER LEFT_PAREN (GAP)? [ exp (COMMA exp)* ] (GAP)? RIGHT_PAREN
 
-vardef              ::= IDENTIFIER EQUAL exp SEMI_COLON
+vardef              ::= VARDEFINITION ident EQUAL arguments
 
 arguments           ::= funcall
                       | IDENTIFIER

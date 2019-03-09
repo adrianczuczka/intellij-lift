@@ -2,7 +2,6 @@
 
 package intellij.lift;
 
-import b.b.L;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import intellij.lift.psi.LiftTypes;
@@ -60,8 +59,8 @@ class LiftLexer implements FlexLexer {
     "\5\0\1\3\3\0\1\3\1\2\2\3\1\1\22\0\1\3\3\0\1\23\3\0\1\11\1\12\1\25\1\26\1\22"+
     "\1\26\1\10\1\24\12\31\1\20\1\21\1\0\1\17\3\0\1\44\3\30\1\33\16\30\1\46\6\30"+
     "\1\15\1\0\1\16\1\0\1\27\1\0\1\36\1\43\1\27\1\41\1\32\1\6\2\27\1\5\2\27\1\4"+
-    "\1\51\1\40\1\42\1\47\1\27\1\34\1\37\1\7\1\35\3\27\1\45\1\27\1\13\1\0\1\14"+
-    "\7\0\1\50\32\0\1\3\207\0\2\50\26\0");
+    "\1\51\1\40\1\42\1\47\1\27\1\34\1\37\1\7\1\35\1\52\2\27\1\45\1\27\1\13\1\0"+
+    "\1\14\7\0\1\50\32\0\1\3\207\0\2\50\26\0");
 
   /** 
    * Translates DFA states to action switch labels.
@@ -71,14 +70,14 @@ class LiftLexer implements FlexLexer {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\1\1\0\1\2\1\3\1\1\4\4\1\5\1\6"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\3\21\1\4\1\22\2\4\2\2\3\23"+
-    "\6\4\1\22\1\24\1\25\2\0\3\4\2\0\1\26"+
-    "\1\4\1\27\4\4\1\0\1\22\1\30\2\4\2\0"+
-    "\2\4\1\31\1\4\3\0\2\4\1\32\1\33\1\34"+
-    "\1\35";
+    "\1\17\1\20\3\21\1\4\1\22\2\4\2\2\1\4"+
+    "\3\23\6\4\1\22\1\24\1\25\2\0\3\4\2\0"+
+    "\1\4\1\26\1\4\1\27\4\4\1\0\1\22\1\30"+
+    "\2\4\2\0\1\31\2\4\1\32\1\4\3\0\2\4"+
+    "\1\33\1\34\1\35\1\36";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[76];
+    int [] result = new int[79];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -103,19 +102,19 @@ class LiftLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\52\0\124\0\176\0\250\0\322\0\374\0\u0126"+
-    "\0\u0150\0\u017a\0\124\0\124\0\124\0\124\0\124\0\124"+
-    "\0\124\0\124\0\124\0\124\0\124\0\u01a4\0\124\0\u01ce"+
-    "\0\u01f8\0\u0222\0\u024c\0\u0276\0\u02a0\0\u02ca\0\124\0\u02f4"+
-    "\0\u031e\0\u0348\0\u0372\0\u039c\0\u03c6\0\u03f0\0\u041a\0\u0444"+
-    "\0\u046e\0\124\0\u017a\0\u0498\0\u04c2\0\u04ec\0\u0516\0\u0540"+
-    "\0\u056a\0\124\0\u0594\0\u01f8\0\u05be\0\u05e8\0\u0612\0\u063c"+
-    "\0\u0666\0\u0666\0\u01f8\0\u0690\0\u06ba\0\u06e4\0\u070e\0\u0738"+
-    "\0\u0762\0\u01f8\0\u078c\0\u07b6\0\u07e0\0\u080a\0\u0834\0\u085e"+
-    "\0\124\0\124\0\u0888\0\u01f8";
+    "\0\0\0\53\0\126\0\201\0\254\0\327\0\u0102\0\u012d"+
+    "\0\u0158\0\u0183\0\126\0\126\0\126\0\126\0\126\0\126"+
+    "\0\126\0\126\0\126\0\126\0\126\0\u01ae\0\126\0\u01d9"+
+    "\0\u0204\0\u022f\0\u025a\0\u0285\0\u02b0\0\u02db\0\u0306\0\126"+
+    "\0\u0331\0\u035c\0\u0387\0\u03b2\0\u03dd\0\u0408\0\u0433\0\u045e"+
+    "\0\u0489\0\u04b4\0\126\0\u0183\0\u04df\0\u050a\0\u0535\0\u0560"+
+    "\0\u058b\0\u05b6\0\u05e1\0\126\0\u060c\0\u0204\0\u0637\0\u0662"+
+    "\0\u068d\0\u06b8\0\u06e3\0\u06e3\0\u0204\0\u070e\0\u0739\0\u0764"+
+    "\0\u078f\0\u0204\0\u07ba\0\u07e5\0\u0204\0\u0810\0\u083b\0\u0866"+
+    "\0\u0891\0\u08bc\0\u08e7\0\126\0\126\0\u0912\0\u0204";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[76];
+    int [] result = new int[79];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -143,46 +142,48 @@ class LiftLexer implements FlexLexer {
     "\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"+
     "\1\3\1\32\1\31\1\3\5\31\1\33\1\31\1\34"+
     "\1\35\1\31\1\36\1\31\1\3\1\31\1\37\1\40"+
-    "\23\37\1\41\22\37\1\0\1\37\53\0\1\4\1\5"+
-    "\1\4\47\0\3\5\52\0\1\31\1\42\2\31\17\0"+
-    "\21\31\1\0\1\31\4\0\4\31\17\0\11\31\1\43"+
-    "\7\31\1\0\1\44\4\0\1\45\3\31\17\0\7\31"+
-    "\1\46\11\31\1\0\1\31\4\0\4\31\17\0\5\31"+
-    "\1\47\13\31\1\0\1\31\31\0\1\50\44\0\1\51"+
-    "\1\52\34\0\1\53\20\0\1\32\24\0\4\31\17\0"+
-    "\21\31\1\0\1\31\10\0\1\50\20\0\1\32\2\54"+
-    "\22\0\4\31\17\0\3\31\1\55\7\31\1\56\5\31"+
-    "\1\0\1\31\4\0\4\31\17\0\13\31\1\57\5\31"+
-    "\1\0\1\31\34\0\1\60\52\0\1\61\16\0\1\37"+
-    "\73\0\1\62\31\0\2\31\1\63\1\31\17\0\21\31"+
-    "\1\0\1\31\4\0\3\31\1\64\17\0\21\31\1\0"+
-    "\1\31\4\0\4\31\17\0\20\31\1\65\1\0\1\31"+
-    "\4\0\4\31\17\0\13\31\1\66\5\31\1\0\1\31"+
-    "\4\0\1\67\3\31\17\0\21\31\1\0\1\31\4\0"+
-    "\4\31\17\0\6\31\1\70\12\31\1\0\1\31\31\0"+
-    "\1\50\2\54\16\0\1\51\2\0\47\51\26\0\1\71"+
-    "\2\0\1\72\24\0\2\31\1\73\1\31\17\0\21\31"+
-    "\1\0\1\31\4\0\4\31\17\0\6\31\1\74\12\31"+
-    "\1\0\1\31\4\0\4\31\17\0\13\31\1\75\5\31"+
-    "\1\0\1\31\34\0\1\76\64\0\1\77\6\0\3\31"+
-    "\1\100\17\0\21\31\1\0\1\31\4\0\4\31\17\0"+
-    "\13\31\1\101\5\31\1\0\1\31\4\0\4\31\17\0"+
-    "\7\31\1\43\11\31\1\0\1\31\4\0\4\31\17\0"+
-    "\10\31\1\70\10\31\1\0\1\31\4\0\4\31\17\0"+
-    "\3\31\1\102\15\31\1\0\1\31\31\0\1\72\24\0"+
-    "\4\31\17\0\14\31\1\103\4\31\1\0\1\31\4\0"+
-    "\1\64\3\31\17\0\21\31\1\0\1\31\36\0\1\104"+
-    "\17\0\1\105\51\0\4\31\1\106\16\0\21\31\1\0"+
-    "\1\31\4\0\4\31\17\0\5\31\1\107\13\31\1\0"+
-    "\1\31\4\0\1\110\3\31\17\0\21\31\1\0\1\31"+
-    "\45\0\1\111\36\0\1\112\23\0\4\113\17\0\1\113"+
-    "\2\0\1\113\1\0\10\113\1\0\1\113\1\0\1\113"+
-    "\1\0\1\113\4\0\3\31\1\114\17\0\21\31\1\0"+
-    "\1\31\4\0\4\31\17\0\3\31\1\64\15\31\1\0"+
-    "\1\31\4\0\4\113\17\0\21\113\1\0\1\113";
+    "\1\41\23\40\1\42\22\40\1\0\2\40\54\0\1\4"+
+    "\1\5\1\4\50\0\3\5\53\0\1\31\1\43\2\31"+
+    "\17\0\21\31\1\0\2\31\4\0\4\31\17\0\11\31"+
+    "\1\44\7\31\1\0\1\45\1\31\4\0\1\46\3\31"+
+    "\17\0\7\31\1\47\11\31\1\0\2\31\4\0\4\31"+
+    "\17\0\5\31\1\50\13\31\1\0\2\31\31\0\1\51"+
+    "\45\0\1\52\1\53\35\0\1\54\20\0\1\32\25\0"+
+    "\4\31\17\0\21\31\1\0\2\31\10\0\1\51\20\0"+
+    "\1\32\2\55\23\0\4\31\17\0\3\31\1\56\7\31"+
+    "\1\57\5\31\1\0\2\31\4\0\4\31\17\0\13\31"+
+    "\1\60\5\31\1\0\2\31\34\0\1\61\53\0\1\62"+
+    "\21\0\4\31\17\0\7\31\1\63\11\31\1\0\2\31"+
+    "\2\0\1\40\74\0\1\64\32\0\2\31\1\65\1\31"+
+    "\17\0\21\31\1\0\2\31\4\0\3\31\1\66\17\0"+
+    "\21\31\1\0\2\31\4\0\4\31\17\0\20\31\1\67"+
+    "\1\0\2\31\4\0\4\31\17\0\13\31\1\70\5\31"+
+    "\1\0\2\31\4\0\1\71\3\31\17\0\21\31\1\0"+
+    "\2\31\4\0\4\31\17\0\6\31\1\72\12\31\1\0"+
+    "\2\31\31\0\1\51\2\55\17\0\1\52\2\0\50\52"+
+    "\26\0\1\73\2\0\1\74\25\0\2\31\1\75\1\31"+
+    "\17\0\21\31\1\0\2\31\4\0\4\31\17\0\6\31"+
+    "\1\76\12\31\1\0\2\31\4\0\4\31\17\0\13\31"+
+    "\1\77\5\31\1\0\2\31\34\0\1\100\65\0\1\101"+
+    "\7\0\1\102\3\31\17\0\21\31\1\0\2\31\4\0"+
+    "\3\31\1\103\17\0\21\31\1\0\2\31\4\0\4\31"+
+    "\17\0\13\31\1\104\5\31\1\0\2\31\4\0\4\31"+
+    "\17\0\7\31\1\44\11\31\1\0\2\31\4\0\4\31"+
+    "\17\0\10\31\1\72\10\31\1\0\2\31\4\0\4\31"+
+    "\17\0\3\31\1\105\15\31\1\0\2\31\31\0\1\74"+
+    "\25\0\4\31\17\0\14\31\1\106\4\31\1\0\2\31"+
+    "\4\0\1\66\3\31\17\0\21\31\1\0\2\31\36\0"+
+    "\1\107\20\0\1\110\52\0\4\31\1\111\16\0\21\31"+
+    "\1\0\2\31\4\0\4\31\17\0\5\31\1\112\13\31"+
+    "\1\0\2\31\4\0\1\113\3\31\17\0\21\31\1\0"+
+    "\2\31\45\0\1\114\37\0\1\115\24\0\4\116\17\0"+
+    "\1\116\2\0\1\116\1\0\10\116\1\0\1\116\1\0"+
+    "\1\116\1\0\2\116\4\0\3\31\1\117\17\0\21\31"+
+    "\1\0\2\31\4\0\4\31\17\0\3\31\1\66\15\31"+
+    "\1\0\2\31\4\0\4\116\17\0\21\116\1\0\2\116";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[2226];
+    int [] result = new int[2365];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -220,12 +221,13 @@ class LiftLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\1\1\0\1\11\7\1\13\11\1\1\1\11\7\1"+
-    "\1\11\12\1\1\11\2\0\3\1\2\0\1\11\6\1"+
-    "\1\0\4\1\2\0\4\1\3\0\2\1\2\11\2\1";
+    "\1\1\1\0\1\11\7\1\13\11\1\1\1\11\10\1"+
+    "\1\11\12\1\1\11\2\0\3\1\2\0\1\1\1\11"+
+    "\6\1\1\0\4\1\2\0\5\1\3\0\2\1\2\11"+
+    "\2\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[76];
+    int [] result = new int[79];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -544,7 +546,7 @@ class LiftLexer implements FlexLexer {
             zzStartRead = commentStart;
             return NOT_TERMINATED_COMMENT;
             }  // fall though
-            case 77: break;
+            case 80: break;
             default:
         return null;
         }
@@ -555,108 +557,108 @@ class LiftLexer implements FlexLexer {
             { return LiftTypes.GAP;
             } 
             // fall through
-          case 30: break;
+          case 31: break;
           case 2: 
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 31: break;
+          case 32: break;
           case 3: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 32: break;
+          case 33: break;
           case 4: 
             { return LiftTypes.IDENTIFIER;
             } 
             // fall through
-          case 33: break;
+          case 34: break;
           case 5: 
             { return LiftTypes.COMPOSER;
             } 
             // fall through
-          case 34: break;
+          case 35: break;
           case 6: 
             { return LiftTypes.LEFT_PAREN;
             } 
             // fall through
-          case 35: break;
+          case 36: break;
           case 7: 
             { return LiftTypes.RIGHT_PAREN;
             } 
             // fall through
-          case 36: break;
+          case 37: break;
           case 8: 
             { return LiftTypes.LEFT_BRACE;
             } 
             // fall through
-          case 37: break;
+          case 38: break;
           case 9: 
             { return LiftTypes.RIGHT_BRACE;
             } 
             // fall through
-          case 38: break;
+          case 39: break;
           case 10: 
             { return LiftTypes.LEFT_BRACKET;
             } 
             // fall through
-          case 39: break;
+          case 40: break;
           case 11: 
             { return LiftTypes.RIGHT_BRACKET;
             } 
             // fall through
-          case 40: break;
+          case 41: break;
           case 12: 
             { return LiftTypes.EQUAL;
             } 
             // fall through
-          case 41: break;
+          case 42: break;
           case 13: 
             { return LiftTypes.COLON;
             } 
             // fall through
-          case 42: break;
+          case 43: break;
           case 14: 
             { return LiftTypes.SEMI_COLON;
             } 
             // fall through
-          case 43: break;
+          case 44: break;
           case 15: 
             { return LiftTypes.COMMA;
             } 
             // fall through
-          case 44: break;
+          case 45: break;
           case 16: 
             { return LiftTypes.APPLICATOR;
             } 
             // fall through
-          case 45: break;
+          case 46: break;
           case 17: 
             { return LiftTypes.OPERATION;
             } 
             // fall through
-          case 46: break;
+          case 47: break;
           case 18: 
             { return LiftTypes.NUMERIC_VALUE;
             } 
             // fall through
-          case 47: break;
+          case 48: break;
           case 19: 
             { 
             } 
             // fall through
-          case 48: break;
+          case 49: break;
           case 20: 
             { return LiftTypes.LINE_COMMENT;
             } 
             // fall through
-          case 49: break;
+          case 50: break;
           case 21: 
             { yybegin(L_BLOCK_COMMENT);
     commentStart = getTokenStart();
             } 
             // fall through
-          case 50: break;
+          case 51: break;
           case 22: 
             { int state = yystate();
             yybegin(YYINITIAL);
@@ -664,42 +666,47 @@ class LiftLexer implements FlexLexer {
             return BLOCK_COMMENT;
             } 
             // fall through
-          case 51: break;
+          case 52: break;
           case 23: 
             { return LiftTypes.TYPE;
             } 
             // fall through
-          case 52: break;
-          case 24: 
-            { return LiftTypes.DEFINITION;
-            } 
-            // fall through
           case 53: break;
-          case 25: 
-            { return LiftTypes.BOOLEAN;
+          case 24: 
+            { return LiftTypes.FUNDEFINITION;
             } 
             // fall through
           case 54: break;
-          case 26: 
-            { return LiftTypes.ARRAY;
+          case 25: 
+            { return LiftTypes.VARDEFINITION;
             } 
             // fall through
           case 55: break;
-          case 27: 
-            { return LiftTypes.TUPLE;
+          case 26: 
+            { return LiftTypes.BOOLEAN;
             } 
             // fall through
           case 56: break;
-          case 28: 
-            { return LiftTypes.IMPORTABLE;
+          case 27: 
+            { return LiftTypes.ARRAY;
             } 
             // fall through
           case 57: break;
-          case 29: 
-            { return LiftTypes.IMPORT_KEYWORD;
+          case 28: 
+            { return LiftTypes.TUPLE;
             } 
             // fall through
           case 58: break;
+          case 29: 
+            { return LiftTypes.IMPORTABLE;
+            } 
+            // fall through
+          case 59: break;
+          case 30: 
+            { return LiftTypes.IMPORT_KEYWORD;
+            } 
+            // fall through
+          case 60: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

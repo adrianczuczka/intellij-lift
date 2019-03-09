@@ -118,7 +118,8 @@ block_comment_end   = {star}{slash}
 
 {importable}                        { return LiftTypes.IMPORTABLE; }
 
-"def"                               { return LiftTypes.DEFINITION; }
+"def"                               { return LiftTypes.FUNDEFINITION; }
+"val"                               { return LiftTypes.VARDEFINITION; }
 
 {left_paren}                        { return LiftTypes.LEFT_PAREN; }
 {right_paren}                       { return LiftTypes.RIGHT_PAREN; }

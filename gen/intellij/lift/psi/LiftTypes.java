@@ -34,8 +34,8 @@ public interface LiftTypes {
   IElementType COLON = new LiftTokenType("COLON");
   IElementType COMMA = new LiftTokenType("COMMA");
   IElementType COMPOSER = new LiftTokenType("COMPOSER");
-  IElementType DEFINITION = new LiftTokenType("DEFINITION");
   IElementType EQUAL = new LiftTokenType("EQUAL");
+  IElementType FUNDEFINITION = new LiftTokenType("FUNDEFINITION");
   IElementType GAP = new LiftTokenType("GAP");
   IElementType IDENTIFIER = new LiftTokenType("IDENTIFIER");
   IElementType IMPORTABLE = new LiftTokenType("IMPORTABLE");
@@ -53,11 +53,12 @@ public interface LiftTypes {
   IElementType SEMI_COLON = new LiftTokenType("SEMI_COLON");
   IElementType TUPLE = new LiftTokenType("TUPLE");
   IElementType TYPE = new LiftTokenType("TYPE");
+  IElementType VARDEFINITION = new LiftTokenType("VARDEFINITION");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == ARGUMENTS) {
+      if (type == ARGUMENTS) {
         return new LiftArgumentsImpl(node);
       }
       else if (type == ARRAY_TYPE) {

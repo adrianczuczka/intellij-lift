@@ -28,8 +28,14 @@ public class LiftVardefImpl extends ASTWrapperPsiElement implements LiftVardef {
 
   @Override
   @NotNull
-  public LiftExp getExp() {
-    return findNotNullChildByClass(LiftExp.class);
+  public LiftArguments getArguments() {
+    return findNotNullChildByClass(LiftArguments.class);
+  }
+
+  @Override
+  @NotNull
+  public LiftIdent getIdent() {
+    return findNotNullChildByClass(LiftIdent.class);
   }
 
 }
