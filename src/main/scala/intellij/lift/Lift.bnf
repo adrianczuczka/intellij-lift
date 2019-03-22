@@ -35,16 +35,14 @@ params              ::= [ param (COMMA param)* ]
 
 param               ::= ident COLON typ
 
-block               ::= LEFT_BRACE GAP* (stmt)* (APPLICATOR arguments)? GAP* RIGHT_BRACE
+block               ::= LEFT_BRACE GAP* (vardef)* stmt (APPLICATOR arguments)? GAP* RIGHT_BRACE
 
-stmt                ::= exp SEMI_COLON? GAP*
+stmt                ::= exp SEMI_COLON? GAP* | exp symbol exp SEMI_COLON? GAP*
 
 exp                 ::= LEFT_PAREN exp RIGHT_PAREN
                       | composed_funcall
                       | funcall
                       | value
-                      | symbol
-                      | vardef
                       | IDENTIFIER
 
 symbol              ::= OPERATION
